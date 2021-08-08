@@ -73,22 +73,22 @@
 	var/atom/movable/screen/using
 
 	using = new /atom/movable/screen/ghost/jumptomob()
-	using.screen_loc = ui_ghost_jumptomob // THIS IS A DEFINE!!!
+	using.screen_loc = ui_ghost_jumptomob
 	using.hud = src
 	static_inventory += using
 
 	using = new /atom/movable/screen/ghost/orbit()
-	using.screen_loc = ui_ghost_orbit // THIS IS A DEFINE!!!
+	using.screen_loc = ui_ghost_orbit
 	using.hud = src
 	static_inventory += using
 
 	using = new /atom/movable/screen/ghost/reenter_corpse()
-	using.screen_loc = ui_ghost_reenter_corpse // THIS IS A DEFINE!!!
+	using.screen_loc = ui_ghost_reenter_corpse
 	using.hud = src
 	static_inventory += using
 
 	using = new /atom/movable/screen/ghost/teleport()
-	using.screen_loc = ui_ghost_teleport // THIS IS A DEFINE!!!
+	using.screen_loc = ui_ghost_teleport
 	using.hud = src
 	static_inventory += using
 

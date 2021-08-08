@@ -37,8 +37,8 @@
 	desc = "Emerge or Return."
 
 /atom/movable/screen/marauder/emerge/Click()
-	if(istype(usr, /mob/living/simple_animal/hostile/clockwork/marauder/guardian))
-		var/mob/living/simple_animal/hostile/clockwork/marauder/guardian/G = usr
+	if(istype(usr, /mob/living/simple_animal/hostile/clockwork/guardian))
+		var/mob/living/simple_animal/hostile/clockwork/guardian/G = usr
 		if(G.is_in_host())
 			G.try_emerge()
 		else

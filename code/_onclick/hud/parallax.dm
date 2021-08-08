@@ -10,6 +10,8 @@
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_1(null, C.view)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_2(null, C.view)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/planet(null, C.view)
+		if(SSparallax.random_layer)
+			C.parallax_layers_cached += new SSparallax.random_layer
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_3(null, C.view)
 
 	C.parallax_layers = C.parallax_layers_cached.Copy()
@@ -293,6 +295,21 @@
 	icon_state = "layer3"
 	speed = 1.4
 	layer = 3
+
+/atom/movable/screen/parallax_layer/random
+	blend_mode = BLEND_OVERLAY
+	speed = 3
+	layer = 3
+
+/atom/movable/screen/parallax_layer/random/space_gas
+	icon_state = "space_gas"
+
+/atom/movable/screen/parallax_layer/random/space_gas/Initialize(mapload, view)
+	. = ..()
+	src.add_atom_colour(SSparallax.random_parallax_color, ADMIN_COLOUR_PRIORITY)
+
+/atom/movable/screen/parallax_layer/random/asteroids
+	icon_state = "asteroids"
 
 /atom/movable/screen/parallax_layer/planet
 	icon_state = "planet"

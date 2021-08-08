@@ -9,3 +9,7 @@
 #define CELL_MC_HUGE (CELL_MC_BASE * 3)
 #define CELL_MC_AMMO_SMALL (CELL_MC_BASE * 2)
 #define CELL_MC_AMMO_LARGE (CELL_MC_BASE * 3)
+///conversion ratio from joules to watts
+#define WATTS / 0.002
+///conversion ratio from watts to joules
+#define JOULES * 0.002

@@ -206,14 +206,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	E.choice = null
 	E.next_page = FALSE
 
-/datum/radial_menu/proc/SetElement(
-	atom/movable/screen/radial/slice/E,
-	choice_id,
-	angle,
-	anim,
-	anim_order,
-	ring = 1
-)
+/datum/radial_menu/proc/SetElement(atom/movable/screen/radial/slice/E,choice_id,angle,anim,anim_order)
 	//Position
 	var/py = (round(cos(angle) * radius) * ring) + py_shift
 	var/px = (round(sin(angle) * radius) * ring)

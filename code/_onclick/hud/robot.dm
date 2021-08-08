@@ -305,3 +305,63 @@
 		else
 			for(var/obj/item/I in R.held_items)
 				screenmob.client.screen -= I
+
+/atom/movable/screen/robot/lamp
+	name = "headlamp"
+	icon_state = "lamp_off"
+	var/mob/living/silicon/robot/robot
+
+/atom/movable/screen/robot/lamp/Click()
+	. = ..()
+	if(.)
+		return
+	robot?.toggle_headlamp()
+	update_icon()
+
+/atom/movable/screen/robot/lamp/update_icon()
+	if(robot?.lamp_enabled)
+		icon_state = "lamp_on"
+	else
+		icon_state = "lamp_off"
+
+/atom/movable/screen/robot/alerts
+	name = "Alert Panel"
+	icon = 'icons/mob/screen_ai.dmi'
+	icon_state = "alerts"
+
+/atom/movable/screen/robot/alerts/Click()
+	. = ..()
+	if(.)
+		return
+	var/mob/living/silicon/robot/borgo = usr
+	borgo.robot_alerts()
+
+/atom/movable/screen/robot/thrusters
+	name = "ion thrusters"
+	icon_state = "ionpulse0"
+
+/atom/movable/screen/robot/thrusters/Click()
+	if(..())
+		return
+	var/mob/living/silicon/robot/R = usr
+	R.toggle_ionpulse()
+
+/atom/movable/screen/robot/sensors
+	name = "Sensor Augmentation"
+	icon_state = "cyborg_sensor"
+
+/atom/movable/screen/robot/sensors/Click()
+	if(..())
+		return
+	var/mob/living/silicon/S = usr
+	S.toggle_sensors()
+/atom/movable/screen/robot/modPC
+	name = "Modular Interface"
+	icon_state = "template"
+	var/mob/living/silicon/robot/robot
+
+/atom/movable/screen/robot/modPC/Click()
+	. = ..()
+	if(.)
+		return
+	robot.modularInterface?.interact(robot)
