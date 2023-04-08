@@ -1146,6 +1146,7 @@
 /area/f13/building/abandoned)
 "aXU" = (
 /obj/structure/table,
+/obj/effect/spawner/lootdrop/f13/armor/tier3,
 /turf/open/indestructible/ground/outside/roof,
 /area/f13/building)
 "aXZ" = (
@@ -2714,10 +2715,8 @@
 /turf/closed/wall/mineral/brick,
 /area/f13/building)
 "cCN" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/barricade/sandbags,
-/turf/open/indestructible/ground/outside/roof,
-/area/f13/building)
+/turf/closed/wall/rust,
+/area/f13/wasteland)
 "cDa" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -2729,6 +2728,9 @@
 /turf/open/floor/f13{
 	icon_state = "floorrusty"
 	},
+/area/f13/building)
+"cDj" = (
+/turf/open/indestructible/ground/inside/mountain,
 /area/f13/building)
 "cDC" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -2767,6 +2769,13 @@
 /turf/open/floor/wood_common{
 	color = "#779999"
 	},
+/area/f13/building)
+"cGj" = (
+/obj/structure/ladder/unbreakable{
+	height = 2;
+	id = "miesterbase"
+	},
+/turf/open/indestructible/ground/outside/roof,
 /area/f13/building)
 "cGR" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3831,10 +3840,6 @@
 	icon_state = "darkredfull"
 	},
 /area/f13/wasteland)
-"dMO" = (
-/mob/living/simple_animal/hostile/renegade/meister,
-/turf/open/indestructible/ground/outside/roof,
-/area/f13/building)
 "dNl" = (
 /obj/structure/curtain{
 	color = "#845f58"
@@ -4815,6 +4820,7 @@
 /area/f13/building)
 "eGT" = (
 /obj/structure/closet/crate,
+/obj/effect/spawner/lootdrop/f13/weapon/dungeon,
 /turf/open/indestructible/ground/outside/roof,
 /area/f13/building)
 "eHn" = (
@@ -7025,6 +7031,11 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/f13/vault_floor/misc/vaultrust,
+/area/f13/building)
+"gQl" = (
+/mob/living/simple_animal/hostile/renegade/meister,
+/obj/effect/spawner/lootdrop/f13/weapon/boss,
+/turf/open/indestructible/ground/outside/roof,
 /area/f13/building)
 "gQq" = (
 /obj/effect/decal/waste{
@@ -12070,8 +12081,11 @@
 	},
 /area/f13/wasteland)
 "ltI" = (
-/turf/closed/wall/rust,
-/area/f13/wasteland)
+/obj/structure/closet/fridge/cannibal,
+/obj/effect/spawner/lootdrop/f13/weapon/dungeon,
+/obj/effect/spawner/lootdrop/f13/weapon/dungeon,
+/turf/open/indestructible/ground/outside/roof,
+/area/f13/building)
 "ltV" = (
 /obj/effect/decal/cleanable/dirt{
 	color = "#363636"
@@ -13039,6 +13053,7 @@
 "mqh" = (
 /obj/structure/closet/fridge/cannibal,
 /obj/effect/validball_spawner,
+/obj/effect/spawner/lootdrop/f13/weapon/boss,
 /turf/open/indestructible/ground/outside/roof,
 /area/f13/building)
 "mqI" = (
@@ -14947,6 +14962,12 @@
 /turf/open/floor/f13{
 	icon_state = "darkdirtysolid"
 	},
+/area/f13/building)
+"odZ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/barricade/sandbags,
+/turf/open/indestructible/ground/outside/roof,
 /area/f13/building)
 "oej" = (
 /obj/effect/decal/cleanable/dirt,
@@ -22905,6 +22926,11 @@
 /obj/effect/spawner/lootdrop/f13/junkspawners,
 /turf/open/floor/plasteel/f13/vault_floor/dark,
 /area/f13/building/mall)
+"wpA" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/barricade/sandbags,
+/turf/open/indestructible/ground/outside/roof,
+/area/f13/building)
 "wpB" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/simple_door/wood,
@@ -23915,9 +23941,11 @@
 /turf/open/floor/carpet/blue,
 /area/f13/building)
 "xkN" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/barricade/sandbags,
+/obj/structure/closet/fridge/cannibal,
+/obj/effect/validball_spawner,
+/obj/effect/spawner/lootdrop/f13/weapon/dungeon,
+/obj/effect/spawner/lootdrop/f13/weapon/dungeon,
+/obj/effect/spawner/lootdrop/f13/armor/tier3,
 /turf/open/indestructible/ground/outside/roof,
 /area/f13/building)
 "xlg" = (
@@ -52916,7 +52944,7 @@ nSB
 oLE
 enE
 iPD
-ltI
+cCN
 oez
 oez
 oez
@@ -53166,14 +53194,14 @@ vje
 vje
 nSB
 ueZ
-dMO
-xkN
+gQl
+odZ
 nSY
 eBE
 hzE
 enE
 nSY
-ltI
+cCN
 oez
 oez
 oez
@@ -53424,7 +53452,7 @@ vje
 enE
 dzz
 mtp
-cCN
+wpA
 sTt
 bjE
 sTt
@@ -54450,7 +54478,7 @@ vje
 vje
 vje
 nSB
-fpb
+ltI
 fnY
 sTt
 gqo
@@ -54707,7 +54735,7 @@ vje
 vje
 vje
 oLE
-mqh
+xkN
 vAK
 tkm
 sTt
@@ -54985,7 +55013,7 @@ tmP
 nSY
 sTt
 nSY
-axq
+cGj
 gxD
 oez
 oez
@@ -55480,10 +55508,10 @@ vje
 enE
 nSB
 enE
-enE
-enE
-nSB
-enE
+cDj
+cDj
+cDj
+cDj
 nSY
 nSY
 enE
@@ -55737,10 +55765,10 @@ vje
 vje
 vje
 vje
-vje
-vje
-vje
-nSB
+gJP
+gJP
+gJP
+cDj
 nSY
 rOK
 nSB
@@ -55993,11 +56021,11 @@ vje
 vje
 vje
 vje
-vje
-vje
-vje
-vje
-nSB
+gJP
+gJP
+gJP
+gJP
+cDj
 nSY
 dAp
 nSB
@@ -56250,11 +56278,11 @@ vje
 vje
 vje
 vje
-vje
-vje
-vje
-vje
-enE
+gJP
+gJP
+gJP
+gJP
+cDj
 ssH
 lIK
 enE
@@ -56507,9 +56535,9 @@ vje
 vje
 vje
 vje
-vje
-vje
-vje
+gJP
+gJP
+gJP
 vje
 enE
 dAp
@@ -56763,9 +56791,9 @@ vje
 vje
 vje
 vje
-vje
-vje
-vje
+gJP
+gJP
+gJP
 vje
 vje
 enE
@@ -57019,9 +57047,9 @@ vje
 vje
 vje
 vje
-vje
-vje
-vje
+gJP
+gJP
+gJP
 vje
 vje
 vje
@@ -57275,9 +57303,9 @@ vje
 vje
 vje
 vje
-vje
-vje
-vje
+gJP
+gJP
+gJP
 vje
 vje
 vje
@@ -57532,8 +57560,8 @@ vje
 vje
 vje
 vje
-vje
-vje
+gJP
+gJP
 vje
 vje
 vje
@@ -57789,8 +57817,8 @@ vje
 vje
 vje
 vje
-vje
-vje
+gJP
+gJP
 vje
 vje
 vje
@@ -58045,9 +58073,9 @@ vje
 vje
 vje
 vje
-vje
-vje
-vje
+gJP
+gJP
+gJP
 vje
 vje
 vje
@@ -58302,8 +58330,8 @@ vje
 vje
 vje
 vje
-vje
-vje
+gJP
+gJP
 vje
 vje
 vje
@@ -58558,9 +58586,9 @@ vje
 vje
 vje
 vje
-vje
-vje
-vje
+gJP
+gJP
+gJP
 vje
 vje
 vje
@@ -58815,8 +58843,8 @@ vje
 vje
 vje
 vje
-vje
-vje
+gJP
+gJP
 vje
 vje
 vje
@@ -59072,7 +59100,7 @@ vje
 vje
 vje
 vje
-vje
+gJP
 vje
 vje
 vje
@@ -59329,7 +59357,7 @@ iRb
 vje
 vje
 vje
-vje
+gJP
 vje
 vje
 vje
@@ -59586,7 +59614,7 @@ iRb
 vje
 vje
 vje
-vje
+gJP
 vje
 vje
 vje
@@ -59843,7 +59871,7 @@ vje
 iRb
 vje
 vje
-vje
+gJP
 vje
 vje
 vje
@@ -60100,7 +60128,7 @@ vje
 iRb
 vje
 vje
-vje
+gJP
 vje
 vje
 vje
@@ -60357,7 +60385,7 @@ vje
 iRb
 vje
 iRb
-vje
+gJP
 vje
 vje
 vje
@@ -60614,7 +60642,7 @@ vje
 iRb
 iRb
 vje
-iRb
+gJP
 vje
 vje
 vje
@@ -60871,7 +60899,7 @@ vje
 vje
 vje
 vje
-vje
+gJP
 iRb
 vje
 iRb
@@ -61128,7 +61156,7 @@ vje
 vje
 vje
 vje
-vje
+gJP
 iRb
 iRb
 oez
@@ -61385,7 +61413,7 @@ vje
 vje
 vje
 vje
-vje
+gJP
 vje
 iRb
 oez
@@ -61642,7 +61670,7 @@ vje
 vje
 vje
 vje
-vje
+gJP
 vje
 vje
 oez
@@ -61899,7 +61927,7 @@ vje
 vje
 vje
 vje
-vje
+gJP
 vje
 vje
 oez
