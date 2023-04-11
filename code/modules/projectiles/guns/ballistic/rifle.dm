@@ -480,7 +480,7 @@
 	desc = "The Rifle No. 5 Mk I, made by the Australian army at Lithgow Small Arms in Australia, its a shortened Enfield used for secondary service in the Australian and New zealand army for jungle warfare other then the L1A1 battle rifle,  made from an SMLE its bolt action holds 10 rounds and sadly cannot fit a scope."
 	icon = 'modular_coyote/icons/objects/rifles.dmi'
 	icon_state = "junglecarbine"
-	item_state = "308"
+	item_state = "junglecarbine"
 	mag_type = /obj/item/ammo_box/magazine/internal/boltaction/enfield
 	weapon_class = WEAPON_CLASS_CARBINE
 	weapon_weight = GUN_TWO_HAND_ONLY
