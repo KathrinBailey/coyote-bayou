@@ -380,3 +380,25 @@ turf/closed/indestructible/f13/splashscreen/proc/ticker()
 	animate(src.fullDark,alpha=0,time=10,easing=CUBIC_EASING)
 	return
 */
+
+//Fenis's Civ13Walls!//
+
+/turf/closed/wall/coyote/genericwall
+	name = "generic wall"
+	desc = "generic wall"
+	icon = 'modular_coyote/icons/turfs/walls.dmi'
+	icon_state = "brick_wall0"
+	hardness = 50
+	
+
+
+
+
+
+
+
+
+
+
+
+
