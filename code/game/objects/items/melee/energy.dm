@@ -74,7 +74,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	force = 10
-	force_on = 25
+	force_on = 35
 	throwforce = 5
 	throwforce_on = 20
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -83,7 +83,6 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	w_class_on = WEIGHT_CLASS_HUGE
 	flags_1 = CONDUCT_1
-	armour_penetration = 0.25
 	attack_verb_off = list("attacked", "burned", "cleaved", "torn", "cut")
 	attack_verb_on = list()
 	light_color = "#00FF00"
@@ -101,7 +100,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	force = 10
-	force_on = 40
+	force_on = 52
 	throwforce = 5
 	throwforce_on = 20
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -110,7 +109,6 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	w_class_on = WEIGHT_CLASS_HUGE
 	flags_1 = CONDUCT_1
-	armour_penetration = 0.75
 	attack_verb_off = list("attacked", "burned", "cleaved", "torn", "cut")
 	attack_verb_on = list()
 	light_color = "#FF0000"
@@ -124,7 +122,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	force = 10
-	force_on = 30
+	force_on = 45
 	throwforce = 5
 	throwforce_on = 20
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -133,7 +131,6 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	w_class_on = WEIGHT_CLASS_HUGE
 	flags_1 = CONDUCT_1
-	armour_penetration = 0.5
 	attack_verb_off = list("attacked", "burned", "cleaved", "torn", "cut")
 	attack_verb_on = list()
 	light_color = "#A020F0"
@@ -147,7 +144,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 	force = 10
-	force_on = 20
+	force_on = 35
 	throwforce = 5
 	throwforce_on = 15
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -156,7 +153,6 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	w_class_on = WEIGHT_CLASS_HUGE
 	flags_1 = CONDUCT_1
-	armour_penetration = 0.3
 	attack_verb_off = list("attacked", "burned", "cleaved", "torn", "cut")
 	attack_verb_on = list()
 	light_color = "#0F52BA"
