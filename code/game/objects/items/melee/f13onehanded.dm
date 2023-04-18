@@ -6,6 +6,7 @@
 	armor = ARMOR_VALUE_GENERIC_ITEM
 	block_parry_data = /datum/block_parry_data/bokken
 	item_flags = ITEM_CAN_PARRY
+	block_chance = 5
 
 /obj/item/melee/onehanded
 	name = "onehand melee template"
