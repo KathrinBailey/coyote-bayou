@@ -1023,8 +1023,8 @@
 	var/py = client.prefs.custom_pixel_y
 	var/defult = "[px], [py]"
 	var/newoffsets = input(src, "Change how your character is positioned on a tile by default.\n\
-								The first number is how many pixels right (or down if negative) to be shifted.\n\
-								The second number is how many pixels up (or down is negative) to be shifted.", "Perspective!", defult) as text|null
+								The first number is how many pixels right (or left if negative) to be shifted.\n\
+								The second number is how many pixels up (or down if negative) to be shifted.", "Perspective!", defult) as text|null
 	if(!newoffsets)
 		to_chat(src, "Offsets unchanged.")
 		return
