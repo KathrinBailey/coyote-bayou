@@ -1651,3 +1651,12 @@
 	item_state = "desert_uniform"
 	item_color = "desert_uniform"
 	can_adjust = FALSE
+
+/obj/item/clothing/under/engineer/alt
+	name = "Engineer Uniform"
+	desc = "A yellow uniform!"
+	icon_state = "engine_alt"
+	item_state = "engine_alt"
+	item_color = "engine_alt"
+	can_adjust = FALSE
+
