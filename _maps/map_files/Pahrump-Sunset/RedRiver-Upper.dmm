@@ -397,7 +397,8 @@
 /obj/structure/table/wood,
 /obj/machinery/porta_turret/f13/turret_9mm/burstfire/raider{
 	name = "Wham Bam Thank You Ma'amgera";
-	desc = "You'll disappear, you'll lose control, your bodies moving on its own. You watch yourself, walk away, a foreign spirt took your place."
+	desc = "You'll disappear, you'll lose control, your bodies moving on its own. You watch yourself, walk away, a foreign spirt took your place.";
+	armor = slist("linemelee" = 45, "linebullet" = 45, "linelaser" = 45, "energy" = 0, "bomb" = 25, "bio" = 25, "rad" = 25, "fire" = 35, "acid" = 35, "wound" = 25, "damage_threshold" = 5)
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -2486,6 +2487,15 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/f13/wood,
+/area/f13/building/abandoned)
+"tw" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/tree/wasteland,
+/obj/machinery/porta_turret/f13/turret_9mm/burstfire/raider{
+	name = "Wham Bam Thank You Ma'amgera";
+	desc = "You'll disappear, you'll lose control, your bodies moving on its own. You watch yourself, walk away, a foreign spirt took your place."
+	},
+/turf/open/indestructible/ground/outside/dirt,
 /area/f13/building/abandoned)
 "tA" = (
 /obj/effect/turf_decal/weather/dirt,
@@ -36610,7 +36620,7 @@ bc
 rA
 Wl
 CY
-bm
+tw
 Oy
 Wl
 Ku

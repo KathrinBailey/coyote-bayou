@@ -5366,12 +5366,6 @@
 /obj/structure/debris/v2,
 /turf/open/indestructible/ground/outside/ruins,
 /area/f13/wasteland/city)
-"cMt" = (
-/obj/structure/nest/securitron,
-/turf/open/indestructible/ground/outside/sidewalk{
-	icon_state = "horizontaltopbordertop2right"
-	},
-/area/f13/wasteland)
 "cMu" = (
 /obj/item/ammo_casing/c9mm,
 /turf/open/indestructible/ground/outside/sidewalk{
@@ -8529,17 +8523,6 @@
 /turf/open/floor/f13/wood,
 /area/f13/building/abandoned)
 "eiE" = (
-/obj/machinery/porta_turret/syndicate/vehicle_turret{
-	desc = "An ancient ballistic turret - it looks rusted, yet stil functional. Safe to assume it's still operational, given the fact it's shooting at you.";
-	faction = list("wastebot");
-	lethal_projectile = /obj/item/projectile/bullet/a762/sport/simple;
-	lethal_projectile_sound = 'sound/f13weapons/auto5.ogg';
-	name = "ancient turret";
-	scan_range = 9;
-	stun_projectile = /obj/item/projectile/bullet/a762/sport/simple;
-	stun_projectile_sound = 'sound/f13weapons/auto5.ogg';
-	throw_range = 9
-	},
 /obj/structure/table,
 /turf/open/indestructible/ground/outside/road{
 	icon_state = "shadowleft"
@@ -29622,7 +29605,6 @@
 /turf/open/water,
 /area/f13/wasteland)
 "oCy" = (
-/obj/structure/nest/securitron,
 /turf/open/indestructible/ground/outside/roaddirt{
 	dir = 6;
 	icon_state = "innerpavement"
@@ -43589,12 +43571,6 @@
 "vrN" = (
 /turf/open/indestructible/ground/outside/sidewalk{
 	icon_state = "outerborder - N"
-	},
-/area/f13/wasteland)
-"vrT" = (
-/obj/structure/nest/securitron,
-/turf/open/indestructible/ground/outside/road{
-	icon_state = "shadowleft"
 	},
 /area/f13/wasteland)
 "vrV" = (
@@ -78322,7 +78298,7 @@ tiN
 xoD
 iKf
 hyW
-cMt
+kPs
 voZ
 jHg
 aCs
@@ -83977,8 +83953,8 @@ nMU
 udf
 rQt
 oCy
-vrT
-vrT
+iCP
+iCP
 iEy
 eiE
 pOE
