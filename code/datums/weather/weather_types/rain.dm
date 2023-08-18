@@ -14,8 +14,8 @@
 	end_overlay = "rain_gathering"
 	weather_message = "<span class='notice'><i>You hear the crack of thunder as the rainstorm grows.</i></span>"
 	weather_overlay = "thunderstorm"
-	weather_duration_lower = 5 MINUTES
-	weather_duration_upper = 25 MINUTES
+	weather_duration_lower = 45 MINUTES
+	weather_duration_upper = 180 MINUTES
 	tag_weather = WEATHER_RAIN
 	area_types = list(/area/f13/wasteland, /area/f13/desert, /area/f13/farm, /area/f13/forest)
 	protected_areas = list(/area/shuttle)
@@ -93,8 +93,8 @@
 
 	weather_message = "<span class='notice'><i>You can feel and see the moisture from the fog as it starts to roll in.</i></span>"
 	weather_overlay = "fog"
-	weather_duration_lower = 2400
-	weather_duration_upper = 7200
+	weather_duration_lower = 120 MINUTES
+	weather_duration_upper = 240 MINUTES
 	end_sound = 'sound/weather/fog.ogg' 
 	end_duration = 250
 	end_message = "<span class='notice'><font size=2>The blanket of fog finally lifts up.</font></span>"
