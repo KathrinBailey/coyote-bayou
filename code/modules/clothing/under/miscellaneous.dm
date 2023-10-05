@@ -206,7 +206,6 @@
 	desc = "We've saved money by giving you half a shirt!"
 	icon_state = "croptop"
 	body_parts_covered = CHEST|GROIN|ARMS
-	body_parts_hidden = CHEST
 	fitted = FEMALE_UNIFORM_TOP
 	can_adjust = FALSE
 
@@ -274,8 +273,7 @@
 	desc = "A simple, inconspicuous harness replacement for a jumpsuit."
 	icon_state = "gear_harness"
 	item_state = "gear_harness"
-	body_parts_covered = CHEST|GROIN
-	body_parts_hidden = 0 // nudie~
+	body_parts_covered = 0
 	can_adjust = FALSE
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
@@ -326,7 +324,6 @@
 	body_parts_covered = CHEST|GROIN
 	can_adjust = FALSE
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
-	body_parts_hidden = 0
 
 /obj/item/clothing/under/misc/stripper/green
 	name = "green stripper outfit"

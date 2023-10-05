@@ -1104,7 +1104,7 @@
 	item_state = "blackdress"
 	fitted = FEMALE_UNIFORM_TOP
 	can_adjust = FALSE
-	body_parts_hidden = ARMS
+	body_parts_covered = CHEST|GROIN
 
 /obj/item/clothing/under/f13/xenon	//Currently broken when worn
 	name = "flashy jumpsuit"
