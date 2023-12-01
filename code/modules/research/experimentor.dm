@@ -85,7 +85,7 @@
 /obj/machinery/rnd/experimentor/examine(mob/user)
 	. = ..()
 	if(in_range(user, src) || isobserver(user))
-		. += "<span class='notice'>The status display reads: Malfunction probability reduced by <b>[badThingCoeff]%</b>.<br>Cooldown interval between experiments at <b>[resetTime*0.1]</b> seconds.</span>"
+		. += span_notice("The status display reads: Malfunction probability reduced by <b>[badThingCoeff]%</b>.<br>Cooldown interval between experiments at <b>[resetTime*0.1]</b> seconds.")
 
 /obj/machinery/rnd/experimentor/proc/checkCircumstances(obj/item/O)
 	//snowflake check to only take "made" bombs
@@ -361,8 +361,8 @@
 			ejectItem(TRUE)
 		else if(prob(EFFECT_PROB_MEDIUM-badThingCoeff))
 			visible_message(span_warning("[src] malfunctions, melting [exp_on] and leaking hot air!"))
-			var/datum/gas_mixture/env = loc.return_air()
-			env.adjust_heat(100000)
+			// var/datum/gas_mixture/env = loc.return_air()
+			// env.adjust_heat(100000)
 			air_update_turf()
 			investigate_log("Experimentor has released hot air.", INVESTIGATE_EXPERIMENTOR)
 			ejectItem(TRUE)
@@ -400,8 +400,8 @@
 			ejectItem(TRUE)
 		else if(prob(EFFECT_PROB_LOW-badThingCoeff))
 			visible_message(span_warning("[src] malfunctions, shattering [exp_on] and leaking cold air!"))
-			var/datum/gas_mixture/env = loc.return_air()
-			env.adjust_heat(-75000)
+			// var/datum/gas_mixture/env = loc.return_air()
+			// env.adjust_heat(-75000)
 			air_update_turf()
 			investigate_log("Experimentor has released cold air.", INVESTIGATE_EXPERIMENTOR)
 			ejectItem(TRUE)

@@ -156,6 +156,9 @@
 	item_state = "knife"
 	flags_1 = CONDUCT_1
 	w_class = WEIGHT_CLASS_SMALL
+	slot_flags = INV_SLOTBIT_MASK
+	tool_behaviour = TOOL_SCREWDRIVER
+	toolspeed = 4
 	throwforce = 15
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	throw_speed = 3
@@ -775,6 +778,15 @@ obj/item/melee/onehanded/knife/switchblade
 		return
 	M.apply_damage(20, STAMINA, "head", M.run_armor_check("head", "melee"))
 
+// Snowflake sappers	Keywords: Damage 27
+/obj/item/melee/unarmed/sappers/fightgloves
+	name = "MMA gloves"
+	desc = "Padded gloves which are ideal for beating the crap out of opponents while keeping your own hands protected."
+	icon_state = "fightglovesblack"
+	item_state = "fightglovesblack"
+	w_class = WEIGHT_CLASS_NORMAL
+	force = 27
+
 // Tiger claws		Keywords: Damage 33, Pointy
 /obj/item/melee/unarmed/tigerclaw
 	name = "tiger claws"
@@ -937,18 +949,6 @@ obj/item/melee/unarmed/punchdagger/cyborg
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = INV_SLOTBIT_BELT | INV_SLOTBIT_GLOVES
 	armor = ARMOR_VALUE_GENERIC_ITEM
-
-
-/obj/item/melee/unarmed/powerfist/refurbished
-	name = "HERAKLES power gauntlet "
-	desc = "A massive, experimental metal gauntlet restored with subpar components and suboptimal engineering skills, it's unlikely that it will hurt as much as a proper power fist, but it's still pretty hefty."
-	icon = 'icons/fallout/objects/melee/melee.dmi'
-	lefthand_file = 'icons/fallout/onmob/weapons/melee1h_lefthand.dmi'
-	righthand_file = 'icons/fallout/onmob/weapons/melee1h_righthand.dmi'
-	icon_state = "goliath"
-	item_state = "goliath"
-	force = 26 //snowflake round start weapon that is meant to just be a reskinned brass knuckles
-	throw_distance = 0
 
 ///////////
 // TOOLS //

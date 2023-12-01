@@ -45,6 +45,11 @@
 	max_damage = 5000
 	animal_origin = DEVIL_BODYPART
 
+/obj/item/bodypart/chest/feral
+	dismemberable = 0
+	animal_origin = FERAL_BODYPART
+	dmg_overlay_type = null
+
 /obj/item/bodypart/chest/larva
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "larva_chest"
@@ -92,7 +97,7 @@
 	if(held_index)
 		owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	if(owner.hud_used)
-		var/obj/screen/inventory/hand/L = owner.hud_used.hand_slots["[held_index]"]
+		var/atom/movable/screen/inventory/hand/L = owner.hud_used.hand_slots["[held_index]"]
 		if(L)
 			L.update_icon()
 
@@ -116,6 +121,11 @@
 	dismemberable = 0
 	max_damage = 5000
 	animal_origin = DEVIL_BODYPART
+
+/obj/item/bodypart/l_arm/feral
+	dismemberable = 0
+	animal_origin = FERAL_BODYPART
+	dmg_overlay_type = null
 
 /obj/item/bodypart/r_arm
 	name = "right arm"
@@ -155,7 +165,7 @@
 	if(held_index)
 		owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	if(owner.hud_used)
-		var/obj/screen/inventory/hand/R = owner.hud_used.hand_slots["[held_index]"]
+		var/atom/movable/screen/inventory/hand/R = owner.hud_used.hand_slots["[held_index]"]
 		if(R)
 			R.update_icon()
 
@@ -180,6 +190,11 @@
 	dismemberable = 0
 	max_damage = 5000
 	animal_origin = DEVIL_BODYPART
+
+/obj/item/bodypart/r_arm/feral
+	dismemberable = 0
+	animal_origin = FERAL_BODYPART
+	dmg_overlay_type = null
 
 /obj/item/bodypart/l_leg
 	name = "left leg"
@@ -235,6 +250,11 @@
 	dismemberable = 0
 	max_damage = 5000
 	animal_origin = DEVIL_BODYPART
+
+/obj/item/bodypart/l_leg/feral
+	dismemberable = 0
+	animal_origin = FERAL_BODYPART
+	dmg_overlay_type = null
 
 /obj/item/bodypart/r_leg
 	name = "right leg"
@@ -292,6 +312,11 @@
 	dismemberable = 0
 	max_damage = 5000
 	animal_origin = DEVIL_BODYPART
+
+/obj/item/bodypart/r_leg/feral
+	dismemberable = 0
+	animal_origin = FERAL_BODYPART
+	dmg_overlay_type = null
 
 /*
 Cannibal Butchering

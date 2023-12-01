@@ -360,7 +360,7 @@
 		var/obj/item/clothing/magichead = new /obj/item/clothing/mask/horsehead/cursed(user.drop_location())
 		if(!user.dropItemToGround(user.wear_mask))
 			qdel(user.wear_mask)
-		user.equip_to_slot_if_possible(magichead, SLOT_WEAR_MASK, TRUE, TRUE)
+		user.equip_to_slot_if_possible(magichead, SLOT_MASK, TRUE, TRUE)
 		qdel(src)
 	else
 		to_chat(user,span_notice("I say thee neigh")) //It still lives here
@@ -754,11 +754,6 @@
 	name = "10mm smg blueprint"
 	icon_state = "blueprint2"
 	crafting_recipe_types = list(/datum/crafting_recipe/smg10mm)
-
-/obj/item/book/granter/crafting_recipe/blueprint/smg10mm/magnetic
-	name = "10mm magnetic blueprint"
-	icon_state = "blueprint2"
-	crafting_recipe_types = list(/datum/crafting_recipe/smg10mm/magnetic)
 
 /obj/item/book/granter/crafting_recipe/blueprint/greasegun
 	name = "m3a1 grease gun blueprint"
@@ -1188,10 +1183,6 @@
 
 	return ..()
 
-/obj/item/book/granter/trait/selection/tribal/Initialize()
-	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
-
 /obj/item/book/granter/crafting_recipe/tribal
 	name = "Tribal traditions"
 	desc = "A book of traditions passed down through generations within the tribe."
@@ -1203,7 +1194,8 @@
 		/datum/crafting_recipe/redambrosia,
 		/datum/crafting_recipe/blueambrosia,
 		/datum/crafting_recipe/greenambrosia,
-		/datum/crafting_recipe/warmace)
+		/datum/crafting_recipe/warmace,
+		/datum/crafting_recipe/horsecream_good)
 
 /obj/item/book/granter/trait/tribaltraditions
 	name = "Tribal Traditions Booklet"
@@ -1394,5 +1386,5 @@
 		/datum/crafting_recipe/tommygun,
 		/datum/crafting_recipe/m1911,
 		/datum/crafting_recipe/policebaton,
-		/datum/crafting_recipe/bowman,
-		/datum/crafting_recipe/radiokeyresponder)
+		/*/datum/crafting_recipe/bowman,
+		/datum/crafting_recipe/radiokeyresponder*/)

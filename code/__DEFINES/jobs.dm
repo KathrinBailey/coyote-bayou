@@ -135,6 +135,7 @@
 #define F13BANKER		(1<<12)	// IDK MAN BUT IT SEEMS IMPORTANT
 #define F13BARKEEP		(1<<13)
 #define F13PILOT		(1<<14)
+#define NASHCURATOR		(1<<15)
 
 #define VAULT			(1<<7)
 
@@ -163,6 +164,7 @@
 #define F13CULTLEADER	(1<<8)
 #define F13TRIBAL		(1<<9)
 #define F13RADIOOP		(1<<10)
+#define F13WASTEDEN		(1<<11)
 
 #define ENCLAVE			(1<<10)
 

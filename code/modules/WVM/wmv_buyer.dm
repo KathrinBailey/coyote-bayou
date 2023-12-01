@@ -69,7 +69,12 @@ GLOBAL_LIST_EMPTY(wasteland_vendor_shop_list)
 		/obj/item/clothing/head/helmet/f13/power_armor = 75,
 		/obj/item/gun/ballistic/shotgun/toy = 5,
 		/obj/item/gun/ballistic/automatic/toy = 5,
-		/obj/item/toy = 5,
+		/obj/item/toy/plush = 5,
+		/obj/item/toy/talking = 5,
+		/obj/item/toy/toy_xeno = 5,
+		/obj/item/toy/cattoy = 5,
+		/obj/item/toy/figure = 5,
+		/obj/item/toy/eightball = 5,
 		/obj/item/melee = 5,
 		/obj/item/melee/transforming = 5,
 		/obj/item/twohanded = 5,
@@ -128,6 +133,8 @@ GLOBAL_LIST_EMPTY(wasteland_vendor_shop_list)
 		/obj/item/gun/ballistic/revolver/winchesterrebored = 0,
 		/obj/item/gun/ballistic/revolver/brick = 0,
 		/obj/item/gun/ballistic/revolver/sling/staff = 0,
+		/obj/item/gun/energy/kinetic_accelerator/crossbow/sling = 0,
+		/obj/item/gun/energy/kinetic_accelerator/crossbow/sling/staff = 0,
 		/obj/item/gun/ballistic/automatic/hobo/zipgun = 0,
 		/obj/item/gun/ballistic/revolver/hobo/piperifle = 0,
 		/obj/item/gun/ballistic/revolver/hobo/piperifle/romckit = 0,
@@ -156,6 +163,8 @@ GLOBAL_LIST_EMPTY(wasteland_vendor_shop_list)
 		/obj/item/reagent_containers/food/snacks/meat/slab/bloatfly_meat = 1,
 		/obj/item/reagent_containers/food/snacks/meat/slab/cazador_meat = 3,
 		/obj/item/reagent_containers/food/snacks/meat/slab/radscorpion_meat = 3,
+		/obj/item/gun/energy/kinetic_accelerator/crossbow = 15,
+		/obj/item/gun/energy/kinetic_accelerator/crossbow/large = 15,
 		/obj/item/stock_parts/capacitor/adv = 3,
 		/obj/item/stock_parts/scanning_module/adv = 3,
 		/obj/item/stock_parts/manipulator/nano = 3,
@@ -866,3 +875,28 @@ Fence
 	popup.set_content(dat)
 	popup.open()
 	return
+
+/obj/item/proc/GetPriceEstimate()
+	var/price = 0
+	var/pricetext = ""
+	if(LAZYLEN(GLOB.wasteland_vendor_shop_list))
+		price = GLOB.wasteland_vendor_shop_list[WVM_SCRAPPER][src.type]
+	else
+		pricetext = span_red("You aren't sure how much this is worth.")
+	if(price > 0)
+		switch(price)
+			if(0.001 to 0.999)
+				pricetext = span_notice("A bunch of these would be worth selling.")
+			if(1 to 9)
+				pricetext = span_notice("This is worth a few copper coins.")
+			if(10 to 29)
+				pricetext = span_notice("This is worth a decent amount of copper coins.")
+			if(30 to 99)
+				pricetext = span_notice("This is worth a few silver coins.")
+			if(100 to 299)
+				pricetext = span_green("This is worth a few gold coins.")
+			if(300 to 999)
+				pricetext = span_green("This is worth a decent amount of gold coins.")
+			else
+				pricetext = span_green("This is worth a lot of coins!")
+	return pricetext

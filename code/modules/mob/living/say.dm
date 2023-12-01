@@ -48,7 +48,7 @@
 
 	if(ic_blocked)
 		//The filter warning message shows the sanitized message though.
-		to_chat(src, "<span class='warning'>That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[message]\"</span></span>")
+		to_chat(src, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[message]\"</span>"))
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
 		return
 
@@ -208,7 +208,6 @@
 		return
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mode, FALSE, source)
-
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type)
 	return message
 
@@ -328,6 +327,8 @@
 	return null
 
 /mob/living/proc/treat_message(message)
+	if(!LAZYLEN(message))
+		return message
 
 	if(HAS_TRAIT(src, TRAIT_UNINTELLIGIBLE_SPEECH))
 		message = unintelligize(message)
@@ -392,14 +393,10 @@
 /mob/living/say_mod(input, message_mode)
 	. = ..()
 	if(message_mode != MODE_CUSTOM_SAY)
-		if(message_mode == MODE_WHISPER)
-			. = verb_whisper
-		else if(stuttering)
+		if(stuttering)
 			. = "stammers"
 		else if(derpspeech)
 			. = "gibbers"
-		else if(message_mode == MODE_SING)
-			. = verb_sing
 		else if(InCritical())
 			. = "whines"
 

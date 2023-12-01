@@ -99,6 +99,7 @@ GLOBAL_LIST_INIT(faction_whitelist_positions, list(
 "High Alderperson",
 "Sheriff",
 "Deputy",
+"Deputy Mayor",
 "Texarkana Quartermaster",
 "Texarkana Trade Worker",
 "Doctor",
@@ -157,6 +158,7 @@ GLOBAL_LIST_INIT(oasis_positions, list(
 	"Councilperson",
 	"Sheriff",
 	"Deputy",
+	"Deputy Mayor",
 //	"Farmer",
 //	"Prospector",
 	"Doctor",
@@ -168,6 +170,7 @@ GLOBAL_LIST_INIT(oasis_positions, list(
 	"Citizen",
 	"Preacher",
 	"Vertibird Pilot",
+	"Nash Librarian",
 ))
 
 GLOBAL_LIST_INIT(legion_command_positions, list(
@@ -241,6 +244,7 @@ GLOBAL_LIST_INIT(wasteland_positions, list(
 	"Vigilante",
 	"Far-Lands Tribals",
 	"Wastelander",
+	"Den Waster",
 	"Radio Operator",
 ))
 

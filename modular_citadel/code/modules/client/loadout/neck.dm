@@ -11,27 +11,27 @@
 /datum/gear/neck/outlawscloak
 	name = "Outlaw's Cloak"
 	path = /obj/item/storage/belt/outlawscloak
-	cost = 3
+	cost = 2
 
 /datum/gear/neck/peacefulcoat
 	name = "Peacetakers Jacket"
 	path = /obj/item/storage/belt/peacefulcoat
-	cost = 3
+	cost = 2
 
 /datum/gear/neck/poachercoat
 	name = "Poachers Coat"
 	path = /obj/item/storage/belt/poachercoat
-	cost = 3
+	cost = 2
 
 /datum/gear/neck/poachervest
 	name = "Poachers Vest"
 	path = /obj/item/storage/belt/poachervest
-	cost = 3
+	cost = 2
 
 /datum/gear/neck/dantecoat
 	name = "Mercenary Trenchcoat"
 	path = /obj/item/storage/belt/dantecoat
-	cost = 3
+	cost = 2
 
 /datum/gear/neck/rangercape
 	name = "Ranger cape"
@@ -133,6 +133,63 @@
 /datum/gear/neck/scarf/desertscarf
 	name = "desert scarf"
 	path = /obj/item/clothing/neck/scarf/cptpatriot
+
+/datum/gear/neck/scarf/laika
+	name = "Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika
+	cost = 2 // because it has a holster in it
+
+/datum/gear/neck/scarf/laika/redder
+	name = "Blood Red Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/redder
+
+/datum/gear/neck/scarf/laika/blue
+	name = "Blue Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/blue
+
+/datum/gear/neck/scarf/laika/bluer
+	name = "Vibrant Blue Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/bluer
+
+/datum/gear/neck/scarf/laika/cyan
+	name = "Cyan Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/cyan
+
+/datum/gear/neck/scarf/laika/tan
+	name = "Tactical Coyote Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/tan
+
+/datum/gear/neck/scarf/laika/brown
+	name = "Brown Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/brown
+
+/datum/gear/neck/scarf/laika/yellow
+	name = "Yellow Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/yellow
+
+/datum/gear/neck/scarf/laika/olive
+	name = "Tactical OD Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/olive
+
+/datum/gear/neck/scarf/laika/white
+	name = "White Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/white
+
+/datum/gear/neck/scarf/laika/black
+	name = "Black Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/black
+
+/datum/gear/neck/scarf/laika/tricolor
+	name = "Tricolor Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/tricolor
+
+/datum/gear/neck/scarf/laika/starspangledbanner
+	name = "Star Spangled Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/starspangledbanner
+
+/datum/gear/neck/scarf/laika/striped
+	name = "Striped Scarf-Cape w/ Holster"
+	path = /obj/item/clothing/neck/laika/striped
 
 /datum/gear/neck/medolier
 	name = "medolier"
@@ -407,6 +464,106 @@
 /datum/gear/neck/domcape
 	name = "Dominia Cape"
 	path = /obj/item/clothing/neck/tie/aurora/dominia_cape_consular
+	cost = 0
+
+/datum/gear/neck/polcape
+	name = "Polish Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories
+	cost = 0
+
+/datum/gear/neck/icelandcape
+	name = "Icelandic Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no2
+	cost = 0
+
+/datum/gear/neck/finlandcape
+	name = "Finnish Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no3
+	cost = 0
+
+/datum/gear/neck/norwaycape
+	name = "Norwegian Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no4
+	cost = 0
+
+/datum/gear/neck/natogermanycape
+	name = "West German Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no5
+	cost = 0
+
+/datum/gear/neck/frcape
+	name = "French Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no6
+	cost = 0
+
+/datum/gear/neck/denmcape
+	name = "Danish Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no7
+	cost = 0
+
+/datum/gear/neck/swedcape
+	name = "Swedish Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no8
+	cost = 0
+
+/datum/gear/neck/tsarcape
+	name = "Tsar Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no9
+	cost = 0
+
+/datum/gear/neck/irecape
+	name = "Irish Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no10
+	cost = 0
+
+/datum/gear/neck/brazcape
+	name = "Brazilian Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no11
+	cost = 0
+
+/datum/gear/neck/cancape
+	name = "Canadian Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no12
+	cost = 0
+
+/datum/gear/neck/ukcape
+	name = "British Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no13
+	cost = 0
+
+/datum/gear/neck/auscape
+	name = "Australian Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no14
+	cost = 0
+
+/datum/gear/neck/nzeacape
+	name = "New Zealand Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no15
+	cost = 0
+
+/datum/gear/neck/italiancape
+	name = "Italian Cape"
+	path = /obj/item/clothing/neck/tie/flagcapesaccessories/no16
+	cost = 0
+
+/datum/gear/neck/thundercape
+	name = "Thunderous Cape"
+	path = /obj/item/clothing/neck/tie/warriorcataccessories
+	cost = 0
+
+/datum/gear/neck/rivercape
+	name = "Rivulet Cape"
+	path = /obj/item/clothing/neck/tie/warriorcataccessories/rivers
+	cost = 0
+
+/datum/gear/neck/windcape
+	name = "Windy Cape"
+	path = /obj/item/clothing/neck/tie/warriorcataccessories/winds
+	cost = 0
+
+/datum/gear/neck/shadowcape
+	name = "Shadowed Cape"
+	path = /obj/item/clothing/neck/tie/warriorcataccessories/shadows
 	cost = 0
 
 /datum/gear/neck/domcapefull

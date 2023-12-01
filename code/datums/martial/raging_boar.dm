@@ -55,7 +55,7 @@
 	if(check_streak(A,D))
 		return TRUE
 	. = TRUE
-	var/damage = (damage_roll(A,D) + 15)
+	var/damage = (damage_roll(A,D) + 5)
 	A.do_attack_animation(D, ATTACK_EFFECT_PUNCH)
 	D.visible_message(span_danger("[A] sends [D] reeling with an atomic pork hammer!"), \
 				span_userdanger("You're sent reeling by [A]'s atomic pork hammer!"), span_hear("You hear a whump!"), COMBAT_MESSAGE_RANGE, A)
@@ -108,8 +108,8 @@
 		return
 	//deftswitch.Grant(H)
 	//sidekick.Grant(H)
-	H.AddComponent(/datum/component/tackler/simple, \
-		stamina_cost = 5, \
+	H.AddComponent(/datum/component/tackler/simple_dunkstrong, \
+		stamina_cost = 10, \
 		base_knockdown = 0, \
 		range = 7, \
 		speed = 1, \
@@ -118,6 +118,7 @@
 	)
 	ADD_TRAIT(H, TRAIT_NOGUNS, RAGING_BOAR_TRAIT)
 	ADD_TRAIT(H, TRAIT_AUTO_CATCH_ITEM, RAGING_BOAR_TRAIT)
+	ADD_TRAIT(H, TRAIT_MARTIAL_A, RAGING_BOAR_TRAIT)
 	H.physiology.stamina_mod *= 0.5 //more stamina
 	H.physiology.stun_mod *= 0.5 //better stun resistance
 
@@ -129,3 +130,4 @@
 
 	REMOVE_TRAIT(H, TRAIT_NOGUNS, RAGING_BOAR_TRAIT)
 	REMOVE_TRAIT(H, TRAIT_AUTO_CATCH_ITEM, RAGING_BOAR_TRAIT)
+	REMOVE_TRAIT(H, TRAIT_MARTIAL_A, RAGING_BOAR_TRAIT)

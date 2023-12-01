@@ -41,6 +41,8 @@ SUBSYSTEM_DEF(ticker)
 	var/triai = 0							//Global holder for Triumvirate
 	var/tipped = 0							//Did we broadcast the tip of the day yet?
 	var/selected_tip						// What will be the tip of the day?
+	///Tips will send anywhere from -50% and +50% of this time.
+	var/midround_tip_interval = 30 MINUTES //~2 tips every hour
 
 	var/timeLeft						//pregame timer
 	var/start_at
@@ -191,10 +193,6 @@ SUBSYSTEM_DEF(ticker)
 				return
 			timeLeft -= wait
 
-			if(timeLeft <= 300 && !tipped)
-				send_tip_of_the_round()
-				tipped = TRUE
-
 			if(timeLeft <= 0)
 				if(SSvote.mode && (SSvote.mode == "roundtype" || SSvote.mode == "dynamic" || SSvote.mode == "mode tiers"))
 					SSvote.result()
@@ -202,6 +200,7 @@ SUBSYSTEM_DEF(ticker)
 					for(var/client/C in SSvote.voting)
 						C << browse(null, "window=vote;can_close=0")
 					SSvote.reset()
+				addtimer(CALLBACK(src, .proc/send_midround_tip), 1 MINUTES)//Send out first tip
 				current_state = GAME_STATE_SETTING_UP
 				Master.SetRunLevel(RUNLEVEL_SETUP)
 				if(start_immediately)
@@ -221,7 +220,7 @@ SUBSYSTEM_DEF(ticker)
 			check_maprotate()
 			scripture_states = scripture_unlock_alert(scripture_states)
 			//SSshuttle.autoEnd()
-
+			
 			if(!roundend_check_paused && mode.check_finished(force_ending) || force_ending)
 				current_state = GAME_STATE_FINISHED
 				toggle_ooc(TRUE) // Turn it on
@@ -233,36 +232,14 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup()
 	to_chat(world, span_boldannounce("Starting game..."))
 	var/init_start = world.timeofday
-		//Create and announce mode
-	var/list/datum/game_mode/runnable_modes
-	if(GLOB.master_mode == "random" || GLOB.master_mode == "secret")
-		runnable_modes = config.get_runnable_modes()
-
-		if(GLOB.master_mode == "secret")
-			hide_mode = 1
-			if(GLOB.secret_force_mode != "secret")
-				var/datum/game_mode/smode = config.pick_mode(GLOB.secret_force_mode)
-				if(!smode.can_start())
-					message_admins(span_notice("Unable to force secret [GLOB.secret_force_mode]. [smode.required_players] players and [smode.required_enemies] eligible antagonists needed."))
-				else
-					mode = smode
-
-		if(!mode)
-			if(!runnable_modes.len)
-				to_chat(world, "<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby.")
-				return 0
-			mode = pickweight(runnable_modes)
-			if(!mode)	//too few roundtypes all run too recently
-				mode = pick(runnable_modes)
-
-	else
-		mode = config.pick_mode(GLOB.master_mode)
-		if(!mode.can_start())
-			to_chat(world, "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players and [mode.required_enemies] eligible antagonists needed. Reverting to pre-game lobby.")
-			qdel(mode)
-			mode = null
-			SSjob.ResetOccupations()
-			return 0
+	GLOB.master_mode = "dynamic"
+	mode = config.pick_mode(GLOB.master_mode)
+	if(!mode.can_start())
+		to_chat(world, "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players and [mode.required_enemies] eligible antagonists needed. Reverting to pre-game lobby.")
+		qdel(mode)
+		mode = null
+		SSjob.ResetOccupations()
+		return 0
 
 	CHECK_TICK
 	//Configure mode and assign player to special mode stuff
@@ -319,7 +296,7 @@ SUBSYSTEM_DEF(ticker)
 		gametime_offset = world.timeofday + timezone_offset_positive - timezone_offset_negative
 	SSdbcore.SetRoundStart()
 
-	to_chat(world, "<span class='notice'><B>Welcome to [station_name()], enjoy your stay!</B></span>")
+	to_chat(world, span_notice("<B>Welcome to [station_name()], enjoy your stay!</B>"))
 	SEND_SOUND(world, sound(begin_music))
 
 	current_state = GAME_STATE_PLAYING
@@ -433,7 +410,7 @@ SUBSYSTEM_DEF(ticker)
 				if (living.client.prefs && living.client.prefs.auto_ooc)
 					if (living.client.prefs.chat_toggles & CHAT_OOC)
 						living.client.prefs.chat_toggles ^= CHAT_OOC
-				var/obj/screen/splash/S = new(living.client, TRUE)
+				var/atom/movable/screen/splash/S = new(living.client, TRUE)
 				S.Fade(TRUE)
 				living.client.init_verbs()
 			livings += living
@@ -449,7 +426,11 @@ SUBSYSTEM_DEF(ticker)
 		var/mob/living/L = I
 		L.mob_transforming = FALSE
 
+/// Use send_midround_tip instead :)
 /datum/controller/subsystem/ticker/proc/send_tip_of_the_round()
+	if(tipped)
+		return
+	tipped = TRUE
 	var/m
 	if(selected_tip)
 		m = selected_tip
@@ -460,6 +441,21 @@ SUBSYSTEM_DEF(ticker)
 
 	if(m)
 		to_chat(world, "<span class='purple'><b>Tip of the round: </b>[html_encode(m)]</span>")
+
+///Sends a game tip to everyone and then queues up another tip.
+/datum/controller/subsystem/ticker/proc/send_midround_tip(override)
+	var/m
+	if(isnull(override) && IsRoundInProgress())//Only send the tip if the round has started. Shouldn't ever be a problem unless something broke.
+		var/list/randomtips = world.file2list("strings/tips.txt")
+		if(randomtips.len)
+			m = pick(randomtips)
+	else if(override)
+		m = override
+	if(m)
+		to_chat(world, "<span class='purple'><b>Tip: </b>[html_encode(m)]</span>")
+	// Queue up the next tip even if it didn't send one so long as it was an organic tip that wasn't sent by an admin.
+	if(isnull(override))
+		addtimer(CALLBACK(src, .proc/send_midround_tip), midround_tip_interval*(rand(5,15)*0.1))//Random tip interval of +- 50% the average
 
 /datum/controller/subsystem/ticker/proc/check_queue()
 	var/hpc = CONFIG_GET(number/hard_popcap)
@@ -473,7 +469,7 @@ SUBSYSTEM_DEF(ticker)
 		if(5) //every 5 ticks check if there is a slot available
 			if(living_player_count() < hpc)
 				if(next_in_line && next_in_line.client)
-					to_chat(next_in_line, "<span class='userdanger'>A slot has opened! You have approximately 20 seconds to join. <a href='?src=[REF(next_in_line)];late_join=override'>\>\>Join Game\<\<</a></span>")
+					to_chat(next_in_line, span_userdanger("A slot has opened! You have approximately 20 seconds to join. <a href='?src=[REF(next_in_line)];late_join=override'>\>\>Join Game\<\<</a>"))
 					SEND_SOUND(next_in_line, sound('sound/misc/notice1.ogg'))
 					next_in_line.LateChoices()
 					return
@@ -589,7 +585,7 @@ SUBSYSTEM_DEF(ticker)
 		if(STATION_DESTROYED_NUKE)
 			news_message = "We would like to reassure all employees that the reports of a Syndicate backed nuclear attack on [station_name()] are, in fact, a hoax. Have a secure day!"
 		if(STATION_EVACUATED)
-			news_message = "The inhabitants of [station_name()] breathe a sigh of the relief as the week comes to an end. "
+			news_message = "The inhabitants of [station_name()] breathe a sigh of the relief as the train arrives at its destination. "
 		if(BLOB_WIN)
 			news_message = "[station_name()] was overcome by an unknown biological outbreak, killing all crew on board. Don't let it happen to you! Remember, a clean work station is a safe work station."
 		if(BLOB_NUKE)
@@ -666,9 +662,9 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/load_mode()
 	var/mode = trim(file2text("data/mode.txt"))
 	if(mode)
-		GLOB.master_mode = mode
+		GLOB.master_mode = "dynamic"
 	else
-		GLOB.master_mode = "extended"
+		GLOB.master_mode = GLOB.dynamic_forced_extended
 	log_game("Saved mode is '[GLOB.master_mode]'")
 
 /datum/controller/subsystem/ticker/proc/save_mode(the_mode)

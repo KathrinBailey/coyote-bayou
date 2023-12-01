@@ -20,6 +20,12 @@
 	if(has_action)
 		action = new base_action(src)
 
+/obj/effect/proc_holder/Destroy()
+	if(!QDELETED(action))
+		qdel(action)
+	action = null
+	return ..()
+
 /obj/effect/proc_holder/proc/on_gain(mob/living/user)
 	return
 
@@ -53,7 +59,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 
 /obj/effect/proc_holder/proc/InterceptClickOn(mob/living/caller, params, atom/A)
 	if(caller.ranged_ability != src || ranged_ability_user != caller) //I'm not actually sure how these would trigger, but, uh, safety, I guess?
-		to_chat(caller, "<span class='warning'><b>[caller.ranged_ability.name]</b> has been disabled.</span>")
+		to_chat(caller, span_warning("<b>[caller.ranged_ability.name]</b> has been disabled."))
 		caller.ranged_ability.remove_ranged_ability()
 		return TRUE //TRUE for failed, FALSE for passed.
 	return FALSE
@@ -63,7 +69,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 		return
 	if(user.ranged_ability && user.ranged_ability != src)
 		if(forced)
-			to_chat(user, "<span class='warning'><b>[user.ranged_ability.name]</b> has been replaced by <b>[name]</b>.</span>")
+			to_chat(user, span_warning("<b>[user.ranged_ability.name]</b> has been replaced by <b>[name]</b>."))
 			user.ranged_ability.remove_ranged_ability()
 		else
 			return
@@ -127,10 +133,11 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 	var/cooldown_min = 0 //This defines what spell quickened four times has as a cooldown. Make sure to set this for every spell
 	var/player_lock = 1 //If it can be used by simple mobs
 
-	var/overlay = 0
+	var/overlay = FALSE
 	var/overlay_icon = 'icons/obj/wizard.dmi'
 	var/overlay_icon_state = "spell"
 	var/overlay_lifespan = 0
+	var/overlay_self = FALSE
 
 	var/sparks_spread = 0
 	var/sparks_amt = 0 //cropped at 10
@@ -199,7 +206,9 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 				else
 					user.whisper(replacetext(invocation," ","`"))
 		if("emote")
-			user.visible_message(invocation, invocation_emote_self) //same style as in mob/living/emote.dm
+			user.visible_message(invocation, invocation_emote_self) //same style as in mob/living/emote.dm	
+		if("me")
+			user.me_verb(invocation)
 
 /obj/effect/proc_holder/spell/proc/playMagSound()
 	playsound(get_turf(usr), sound,50,1)
@@ -260,9 +269,15 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 	if(action)
 		action.UpdateButtonIcon()
 
-/obj/effect/proc_holder/spell/proc/before_cast(list/targets)
+/obj/effect/proc_holder/spell/proc/before_cast(list/targets, mob/user)
+	do_overlays(targets, user)
+
+/obj/effect/proc_holder/spell/proc/do_overlays(list/targets, mob/user)
 	if(overlay)
-		for(var/atom/target in targets)
+		var/overlay_targets = targets
+		if(overlay_self && user)
+			overlay_targets |= user
+		for(var/atom/target in overlay_targets)
 			var/location
 			if(isliving(target))
 				location = target.loc

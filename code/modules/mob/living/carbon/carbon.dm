@@ -20,7 +20,10 @@
 	hand_bodyparts = null		//Just references out bodyparts, don't need to delete twice.
 	remove_from_all_data_huds()
 	QDEL_NULL(dna)
+	last_mind = null
 	GLOB.carbon_list -= src
+	moveToNullspace() // suckit
+	return QDEL_HINT_LETMELIVE
 
 /mob/living/carbon/relaymove(mob/user, direction)
 	if(user in src.stomach_contents)
@@ -62,7 +65,7 @@
 	if(new_item)
 		new_item.swapped_to(src)
 	if(hud_used)
-		var/obj/screen/inventory/hand/H
+		var/atom/movable/screen/inventory/hand/H
 		H = hud_used.hand_slots["[oindex]"]
 		if(H)
 			H.update_icon()
@@ -160,9 +163,10 @@
 
 /mob/living/carbon/throw_item(atom/target)
 	throw_mode_off()
+	update_mouse_pointer()
 	if(!target || !isturf(loc))
 		return
-	if(istype(target, /obj/screen))
+	if(istype(target, /atom/movable/screen))
 		return
 
 	//CIT CHANGES - makes it impossible to throw while in stamina softcrit
@@ -240,7 +244,7 @@
 	<B><FONT size=3>[name]</FONT></B>
 	<HR>
 	<BR><B>Head:</B> <A href='?src=[REF(src)];item=[SLOT_HEAD]'>				[(head && !(head.item_flags & ABSTRACT)) 			? head 		: "Nothing"]</A>
-	<BR><B>Mask:</B> <A href='?src=[REF(src)];item=[SLOT_WEAR_MASK]'>		[(wear_mask && !(wear_mask.item_flags & ABSTRACT))	? wear_mask	: "Nothing"]</A>
+	<BR><B>Mask:</B> <A href='?src=[REF(src)];item=[SLOT_MASK]'>		[(wear_mask && !(wear_mask.item_flags & ABSTRACT))	? wear_mask	: "Nothing"]</A>
 	<BR><B>Neck:</B> <A href='?src=[REF(src)];item=[SLOT_NECK]'>		[(wear_neck && !(wear_neck.item_flags & ABSTRACT))	? wear_neck	: "Nothing"]</A>"}
 
 	for(var/i in 1 to held_items.len)
@@ -532,6 +536,12 @@
 		chat_color_darkened = "#[new_runecolor]"
 		to_chat(src, "<span style'color=#[new_runecolor]'>Your runechat color is now #[new_runecolor]!</span>")
 
+/mob/living/carbon/get_chat_color()
+	var/color = get_feature("chat_color")
+	if(color == "whoopsie" || !color)
+		return rgb(255, 255, 255)
+	return "#[get_feature("chat_color")]"
+
 /mob/living/carbon/fall(forced)
 	loc.handle_fall(src, forced)//it's loc so it doesn't call the mob's handle_fall which does nothing
 
@@ -657,26 +667,37 @@
 	if(cuff_break)
 		. = !((I == handcuffed) || (I == legcuffed))
 		qdel(I)
+		update_handcuffed()
+		update_inv_legcuffed()
 		return
-
+	if(istype(I, /obj/item/restraints))
+		var/obj/item/restraints/R = I
+		if(R.del_on_remove)
+			if(handcuffed == R)
+				handcuffed = null
+				update_handcuffed()
+			if(legcuffed == R)
+				legcuffed = null
+				update_inv_legcuffed()
+			qdel(R)
+			return
+	if(I == handcuffed)
+		handcuffed.forceMove(drop_location())
+		handcuffed = null
+		I.dropped(src)
+		if(buckled && buckled.buckle_requires_restraints)
+			buckled.unbuckle_mob(src)
+		update_handcuffed()
+		return
+	if(I == legcuffed)
+		legcuffed.forceMove(drop_location())
+		legcuffed = null
+		I.dropped(src)
+		update_inv_legcuffed()
+		return
 	else
-		if(I == handcuffed)
-			handcuffed.forceMove(drop_location())
-			handcuffed = null
-			I.dropped(src)
-			if(buckled && buckled.buckle_requires_restraints)
-				buckled.unbuckle_mob(src)
-			update_handcuffed()
-			return
-		if(I == legcuffed)
-			legcuffed.forceMove(drop_location())
-			legcuffed = null
-			I.dropped(src)
-			update_inv_legcuffed()
-			return
-		else
-			dropItemToGround(I)
-			return
+		dropItemToGround(I)
+		return
 
 /mob/living/carbon/get_standard_pixel_y_offset(lying = 0)
 	. = ..()
@@ -918,7 +939,7 @@
 		become_blind(EYES_COVERED)
 	else if(tinttotal >= TINT_DARKENED)
 		cure_blind(EYES_COVERED)
-		overlay_fullscreen("tint", /obj/screen/fullscreen/impaired, 2)
+		overlay_fullscreen("tint", /atom/movable/screen/fullscreen/impaired, 2)
 	else
 		cure_blind(EYES_COVERED)
 		clear_fullscreen("tint", 0)
@@ -994,10 +1015,10 @@
 					visionseverity = 9
 				if(-INFINITY to -24)
 					visionseverity = 10
-			overlay_fullscreen("critvision", /obj/screen/fullscreen/crit/vision, visionseverity)
+			overlay_fullscreen("critvision", /atom/movable/screen/fullscreen/crit/vision, visionseverity)
 		else
 			clear_fullscreen("critvision")
-		overlay_fullscreen("crit", /obj/screen/fullscreen/crit, severity)
+		overlay_fullscreen("crit", /atom/movable/screen/fullscreen/crit, severity)
 	else
 		clear_fullscreen("crit")
 		clear_fullscreen("critvision")
@@ -1021,7 +1042,7 @@
 				severity = 6
 			if(45 to INFINITY)
 				severity = 7
-		overlay_fullscreen("oxy", /obj/screen/fullscreen/oxy, severity)
+		overlay_fullscreen("oxy", /atom/movable/screen/fullscreen/oxy, severity)
 	else
 		clear_fullscreen("oxy")
 
@@ -1042,7 +1063,7 @@
 				severity = 5
 			if(85 to INFINITY)
 				severity = 6
-		overlay_fullscreen("brute", /obj/screen/fullscreen/brute, severity)
+		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
 		clear_fullscreen("brute")
 
@@ -1106,7 +1127,7 @@
 	if(handcuffed)
 		drop_all_held_items()
 		stop_pulling()
-		throw_alert("handcuffed", /obj/screen/alert/restrained/handcuffed, new_master = src.handcuffed)
+		throw_alert("handcuffed", /atom/movable/screen/alert/restrained/handcuffed, new_master = src.handcuffed)
 		if(handcuffed.demoralize_criminals)
 			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "handcuffed", /datum/mood_event/handcuffed)
 	else
@@ -1426,7 +1447,7 @@
 /mob/living/carbon/check_obscured_slots()
 	if(head)
 		if(head.flags_inv & HIDEMASK)
-			LAZYOR(., SLOT_WEAR_MASK)
+			LAZYOR(., SLOT_MASK)
 		if(head.flags_inv & HIDEEYES)
 			LAZYOR(., SLOT_GLASSES)
 		if(head.flags_inv & HIDEEARS)
@@ -1490,10 +1511,6 @@
 /mob/living/carbon/proc/get_biological_state()
 	return BIO_FLESH_BONE
 
-/mob/living/carbon/get_status_tab_items()
-	. = ..()
-	if(HAS_TRAIT(src, TRAIT_HEAL_TOUCH) || HAS_TRAIT(src, TRAIT_HEAL_TONGUE) || HAS_TRAIT(src, TRAIT_HEAL_TEND))
-		. += ""
-		. += "Healing Charges: [FLOOR(heal_reservoir, 1)]"
-
-
+///grab feature from DNA
+/mob/living/carbon/proc/get_feature(feat)
+	return dna?.features[feat]

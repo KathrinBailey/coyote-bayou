@@ -1040,7 +1040,7 @@ GLOBAL_LIST_EMPTY(reskin_list)
 /// PDA SKINS ///
 /datum/component/reskinnable/pda
 	skins = list(
-		"PipBoy 3000",
+		"DataPal",
 		"Medical PDA",
 		"Virology PDA",
 		"Engineering PDA",
@@ -1097,8 +1097,8 @@ GLOBAL_LIST_EMPTY(reskin_list)
 		"Handy Neko PDA",
 	)
 /datum/reskin/pda
-	skin = "PipBoy 3000"
-	name = "PipBoy 3000"
+	skin = "Datapal 3000"
+	name = "Datapal 3000"
 	desc = null
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pda"
@@ -2273,7 +2273,7 @@ GLOBAL_LIST_EMPTY(reskin_list)
 /datum/reskin/gun/magazine/scar_l
 	skin = "SCAR-L"
 	name = "SCAR-L"
-	desc = "As an ancient modern rifle chambered in 5.56mm, the Sierra Catgirl Army Rifle - (maLe) is a popular choice for those wanting to patrol the Northwestern Silvervine."
+	desc = "As an ancient modern rifle chambered in 5mm, the Sierra Catgirl Army Rifle - (maLe) is a popular choice for those wanting to patrol the Northwestern Silvervine."
 	icon = 'icons/fallout/objects/guns/ballistic.dmi'
 	icon_state = "scarl"
 	item_state = "scarl"

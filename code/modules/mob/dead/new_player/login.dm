@@ -1,9 +1,9 @@
 /mob/dead/new_player/Login()
 	if(CONFIG_GET(flag/use_exp_tracking))
-		client.set_exp_from_db()
-		client.set_db_player_flags()
+		client?.set_exp_from_db()
+		client?.set_db_player_flags()
 	if(CONFIG_GET(flag/use_role_whitelist))
-		client.set_job_whitelist_from_db()
+		client?.set_job_whitelist_from_db()
 	
 	if(!mind)
 		mind = new /datum/mind(key)
@@ -20,11 +20,11 @@
 		to_chat(src, "<div class=\"motd\">[motd]</div>", handle_whitespace=FALSE)
 
 	if(GLOB.admin_notice)
-		to_chat(src, "<span class='notice'><b>Admin Notice:</b>\n \t [GLOB.admin_notice]</span>")
+		to_chat(src, span_notice("<b>Admin Notice:</b>\n \t [GLOB.admin_notice]"))
 
 	var/spc = CONFIG_GET(number/soft_popcap)
 	if(spc && living_player_count() >= spc)
-		to_chat(src, "<span class='notice'><b>Server Notice:</b>\n \t [CONFIG_GET(string/soft_popcap_message)]</span>")
+		to_chat(src, span_notice("<b>Server Notice:</b>\n \t [CONFIG_GET(string/soft_popcap_message)]"))
 
 	sight |= SEE_TURFS
 

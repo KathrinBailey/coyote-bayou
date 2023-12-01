@@ -27,21 +27,27 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	new/datum/stack_recipe("simple metal door", /obj/structure/simple_door/metal, 10, one_per_turf = TRUE, on_floor = TRUE), \
 	null, \
 	new/datum/stack_recipe("metal rod", /obj/item/stack/rods, 1, 2, 60), \
+// Coyote Recipes: Start
+	null, \
+	new/datum/stack_recipe("metal barricade", /obj/structure/deployable_barricade/metal, 2, 1, time = 1 SECONDS), \
 	new/datum/stack_recipe("iron ingot", /obj/item/ingot/iron, 6, time = 100), \
 	new/datum/stack_recipe("anomalous artifact exclusion cube", /obj/item/storage/box/artifactcontainer/metal, 1, time = 10),
 	/*new/datum/stack_recipe("metal parts", /obj/item/stack/crafting/metalparts, 5), \ very easy to find already*/
 	new/datum/stack_recipe("length of chain", /obj/item/blacksmith/chain, 1, time = 50), \
-	new/datum/stack_recipe("metal arrowhead", /obj/item/stack/arrowhead/metal, 2, 1, time = 2.5 SECONDS), \
+	new/datum/stack_recipe("regular arrowhead", /obj/item/stack/arrowhead, 2, 1, time = 2.5 SECONDS), \
+	new/datum/stack_recipe("bludgeoning arrowhead", /obj/item/stack/arrowhead/bludgeon, 1, 1, time = 1 SECONDS), \
 	new/datum/stack_recipe("field arrowhead", /obj/item/stack/arrowhead/field, 1, 1, time = 1 SECONDS), \
 	null, \
 	new/datum/stack_recipe("lock", /obj/item/lock_construct, 1), \
-	new/datum/stack_recipe("coffee pot", /obj/item/crafting/coffee_pot, 1), \
-	new/datum/stack_recipe("lunchbox", /obj/item/crafting/lunchbox, 1), \
 	new/datum/stack_recipe("key", /obj/item/key, 1), \
 	new/datum/stack_recipe("key chain", /obj/item/storage/keys_set, 1), \
+	new/datum/stack_recipe("bolt lock", /obj/item/lock_bolt, 1), \
+	new/datum/stack_recipe("coffee pot", /obj/item/crafting/coffee_pot, 1), \
+	new/datum/stack_recipe("lunchbox", /obj/item/crafting/lunchbox, 1), \
 	null, \
 	new/datum/stack_recipe("seed extractor", /obj/structure/legion_extractor, 6, one_per_turf = TRUE, on_floor = TRUE), \
 	null, \
+// Coyote Recipes: End
 	new/datum/stack_recipe("stool", /obj/structure/chair/stool, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("bar stool", /obj/structure/chair/stool/bar, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("bed", /obj/structure/bed, 2, one_per_turf = TRUE, on_floor = TRUE), \
@@ -128,19 +134,6 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 		new /datum/stack_recipe("Black King", /obj/structure/chess/blackking, 2, time = 10, one_per_turf = 1, on_floor = 1), \
 	)),
 ))
-
-/* Temp cache of commented out metal stack stuff.
-		new /datum/stack_recipe("science airlock assembly", /obj/structure/door_assembly/door_assembly_science, 4, time = 50, one_per_turf = 1, on_floor = 1), \
-		new /datum/stack_recipe("mining airlock assembly", /obj/structure/door_assembly/door_assembly_min, 4, time = 50, one_per_turf = 1, on_floor = 1), \
-		new /datum/stack_recipe("atmospherics airlock assembly", /obj/structure/door_assembly/door_assembly_atmo, 4, time = 50, one_per_turf = 1, on_floor = 1), \
-		new /datum/stack_recipe("virology airlock assembly", /obj/structure/door_assembly/door_assembly_viro, 4, time = 50, one_per_turf = 1, on_floor = 1), \
-		new /datum/stack_recipe("external maintenance airlock assembly", /obj/structure/door_assembly/door_assembly_extmai, 4, time = 50, one_per_turf = 1, on_floor = 1), \
-
-	new/datum/stack_recipe("reflector frame", /obj/structure/reflector, 5, time = 25, one_per_turf = TRUE, on_floor = TRUE), \
-	new/datum/stack_recipe("apc frame", /obj/item/wallframe/apc, 2), \
-	new/datum/stack_recipe("air alarm frame", /obj/item/wallframe/airalarm, 2), \
-	new/datum/stack_recipe("fire alarm frame", /obj/item/wallframe/firealarm, 2), \
-*/
 
 /obj/item/stack/sheet/metal
 	name = "metal"
@@ -284,6 +277,7 @@ GLOBAL_LIST_INIT(plasteel_recipes, list ( \
 
 GLOBAL_LIST_INIT(wood_recipes, list ( \
 	new/datum/stack_recipe("wooden barricade", /obj/structure/barricade/wooden, 5, time = 50, one_per_turf = TRUE, on_floor = TRUE), \
+	new/datum/stack_recipe("Wooden directional barricade", /obj/structure/deployable_barricade/wooden, 2, time = 1 SECONDS, one_per_turf = TRUE, on_floor = TRUE), \
 	new/datum/stack_recipe("wooden floor tile", /obj/item/stack/tile/wood, 1, 4, 20), \
 	new/datum/stack_recipe("wooden arrow shaft", /obj/item/arrow_shaft, 1, 1, 0.5 SECONDS, is_stack = FALSE), \
 	null, \
@@ -325,6 +319,8 @@ GLOBAL_LIST_INIT(wood_recipes, list ( \
 		)), \
 	new/datum/stack_recipe_list("cooking", list( \
 		new /datum/stack_recipe("wooden bowl", /obj/item/reagent_containers/glass/bowl/wooden_bowl, 3, time = 30, one_per_turf = FALSE, on_floor = TRUE),\
+		new /datum/stack_recipe("wooden mug", /obj/item/reagent_containers/glass/woodmug, 3, time = 30, one_per_turf = FALSE, on_floor = TRUE),\
+		new /datum/stack_recipe("wooden cup", /obj/item/reagent_containers/glass/woodmug/cup, 3, time = 30, one_per_turf = FALSE, on_floor = TRUE),\
 		new /datum/stack_recipe("rolling pin", /obj/item/kitchen/rollingpin, 2, time = 30, one_per_turf = TRUE, on_floor = TRUE),\
 		new /datum/stack_recipe("chopping block", /obj/item/chopping_block, 2, time = 30, one_per_turf = TRUE, on_floor = TRUE),\
 		new /datum/stack_recipe("butter churn", /obj/structure/butter_churn, 7, time = 35, one_per_turf = TRUE, on_floor = TRUE),\
@@ -460,7 +456,6 @@ GLOBAL_LIST_INIT(cloth_recipes, list ( \
 	new/datum/stack_recipe("salvage bag", /obj/item/storage/bag/salvage, 4), \
 	null, \
 	new/datum/stack_recipe("string", /obj/item/weaponcrafting/string, 1, time = 10), \
-	new/datum/stack_recipe("practice arrowhead", /obj/item/stack/arrowhead/practice, 1, 1, time = 1 SECONDS), \
 	new/datum/stack_recipe("improvised gauze", /obj/item/stack/medical/gauze/improvised, 1, 2, 6), \
 	new/datum/stack_recipe("improvised suture", /obj/item/stack/medical/suture/emergency, 3), \
 	new/datum/stack_recipe("rag", /obj/item/reagent_containers/rag, 1), \
@@ -841,7 +836,7 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 
 GLOBAL_LIST_INIT(bone_recipes, list(
 	new /datum/stack_recipe("bone dagger", /obj/item/melee/onehanded/knife/bone, 2, time = 20),
-	new /datum/stack_recipe("bone arrowhead", /obj/item/stack/arrowhead/bone, 2, 1, time = 2 SECONDS),
+	new /datum/stack_recipe("bone arrowhead", /obj/item/stack/arrowhead/bone, 1, 1, time = 2 SECONDS),
 	null, \
 	new /datum/stack_recipe("bone armor", /obj/item/clothing/suit/armor/light/tribal/bone, 6, time = 30),
 	new /datum/stack_recipe("skull helmet", /obj/item/clothing/head/helmet/skull, 4, time = 30),

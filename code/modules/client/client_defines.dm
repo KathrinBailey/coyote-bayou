@@ -65,7 +65,7 @@
 
 	preload_rsc = PRELOAD_RSC
 
-	var/obj/screen/click_catcher/void
+	var/atom/movable/screen/click_catcher/void
 
 	//These two vars are used to make a special mouse cursor, with a unique icon for clicking
 	var/mouse_up_icon = null
@@ -93,7 +93,7 @@
 
 	var/datum/player_details/player_details //these persist between logins/logouts during the same round.
 
-	var/list/char_render_holders			//Should only be a key-value list of north/south/east/west = obj/screen.
+	var/list/char_render_holders			//Should only be a key-value list of north/south/east/west = atom/movable/screen.
 
 	/// Last time they used fix macros
 	var/last_macro_fix = 0
@@ -122,8 +122,6 @@
 	var/obj/item/active_mousedown_item = null
 	///Used in MouseDrag to preserve the original mouse click parameters
 	var/mouseParams = ""
-	///Used in MouseDrag to preserve the last mouse-entered location.
-	var/mouseLocation = null
 	///Used in MouseDrag to preserve the last mouse-entered object.
 	var/mouseObject = null
 	var/mouseControlObject = null
@@ -177,8 +175,6 @@
 	/// Last asset send job id.
 	var/last_asset_job = 0
 	var/last_completed_asset_job = 0
-
-	var/list/moused_over_objects = list()
 
 	//world.time of when the crew manifest can be accessed
 	var/crew_manifest_delay

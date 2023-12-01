@@ -42,7 +42,7 @@
 	. += deconstruction_hints(user)
 
 /obj/structure/table/proc/deconstruction_hints(mob/user)
-	return "<span class='notice'>The top is <b>screwed</b> on, but the main <b>bolts</b> are also visible.</span>"
+	return span_notice("The top is <b>screwed</b> on, but the main <b>bolts</b> are also visible.")
 
 /obj/structure/table/update_icon()
 	if(smooth)
@@ -107,11 +107,10 @@
 	else
 		return !density
 
-/obj/structure/table/CanAStarPass(ID, dir, caller)
+/obj/structure/table/CanAStarPass(obj/item/card/id/ID, to_dir, atom/movable/caller)
 	. = !density
-	if(ismovable(caller))
-		var/atom/movable/mover = caller
-		. = . || (mover.pass_flags & pass_flags_self)
+	if(istype(caller))
+		. = . || (caller.pass_flags & PASSTABLE)
 
 /obj/structure/table/proc/tableplace(mob/living/user, mob/living/pushed_mob)
 	pushed_mob.forceMove(src.loc)
@@ -174,13 +173,14 @@
 			if(I.use_tool(src, user, 20, volume=50))
 				deconstruct(TRUE)
 			return
-
 		if(istype(I, /obj/item/wrench) && deconstruction_ready)
 			to_chat(user, span_notice("You start deconstructing [src]..."))
 			if(I.use_tool(src, user, 40, volume=50))
 				playsound(src.loc, 'sound/items/deconstruct.ogg', 50, 1)
 				deconstruct(TRUE, 1)
 			return
+	if(SEND_SIGNAL(I, COMSIG_TABLE_CLICKED_WITH_ITEM, src, user, params) & TABLE_NO_PLACE)
+		return
 
 	if(istype(I, /obj/item/storage/bag/tray))
 		var/obj/item/storage/bag/tray/T = I
@@ -193,16 +193,6 @@
 			return
 		// If the tray IS empty, continue on (tray will be placed on the table like other items)
 
-	if(istype(I, /obj/item/circuitboard/machine/autolathe/ammo/improvised))
-		var/obj/item/circuitboard/machine/autolathe/ammo/improvised/ammothing = I
-		if(!do_after(user, 3 SECONDS, TRUE, src, TRUE, allow_movement = TRUE, stay_close = TRUE))
-			to_chat(user, span_alert("You were interrupted!"))
-			return
-		var/obj/machinery/autolathe/ammo/improvised/thebench = new(get_turf(src))
-		thebench.tableize()
-		qdel(ammothing)
-		to_chat(user, span_notice("You set up a reloading bench on [src]!"))
-		return
 
 	if(user.a_intent != INTENT_HARM && !(I.item_flags & ABSTRACT))
 		if(user.transferItemToLoc(I, drop_location()))
@@ -248,6 +238,7 @@
 			new frame(T)
 		else
 			new framestack(T, framestackamount)
+	SEND_SIGNAL(src, COMSIG_OBJ_DECONSTRUCT, disassembled, wrench_disassembly)
 	qdel(src)
 
 /obj/structure/table/greyscale
@@ -361,6 +352,7 @@
 		if(istype(AM, /obj/item/shard))
 			AM.throw_impact(L)
 	L.DefaultCombatKnockdown(100)
+	SEND_SIGNAL(src, COMSIG_OBJ_BREAK)
 	qdel(src)
 
 /obj/structure/table/glass/deconstruct(disassembled = TRUE, wrench_disassembly = 0)
@@ -450,6 +442,10 @@
 /obj/structure/table/wood/narsie_act(total_override = TRUE)
 	if(!total_override)
 		..()
+
+/obj/structure/table/wood/add_debris_element()
+	AddElement(/datum/element/debris, DEBRIS_WOOD, -10, 5)
+
 
 /obj/structure/table/wood/junk
 	name = "makeshift bar table"
@@ -580,8 +576,8 @@
 
 /obj/structure/table/reinforced/deconstruction_hints(mob/user)
 	if(deconstruction_ready)
-		return "<span class='notice'>The top cover has been <i>welded</i> loose and the main frame's <b>bolts</b> are exposed.</span>"
-	return "<span class='notice'>The top cover is firmly <b>welded</b> on.</span>"
+		return span_notice("The top cover has been <i>welded</i> loose and the main frame's <b>bolts</b> are exposed.")
+	return span_notice("The top cover is firmly <b>welded</b> on.")
 
 /obj/structure/table/reinforced/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/weldingtool))
@@ -732,7 +728,7 @@
 
 /obj/structure/rack/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>It's held together by a couple of <b>bolts</b>.</span>"
+	. += span_notice("It's held together by a couple of <b>bolts</b>.")
 
 /obj/structure/rack/CanAllowThrough(atom/movable/mover, border_dir)
 	..()

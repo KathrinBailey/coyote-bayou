@@ -43,7 +43,7 @@
 	deconstruction_hints(user)
 
 /turf/closed/wall/proc/deconstruction_hints(mob/user)
-	return "<span class='notice'>The outer plating is <b>welded</b> firmly in place.</span>"
+	return span_notice("The outer plating is <b>welded</b> firmly in place.")
 
 /turf/closed/wall/attack_tk()
 	return
@@ -507,9 +507,9 @@
 		// if(!A.CanPass(user, get_dir(AboveT, targetDest)))
 		// 	bad = TRUE
 		// 	break
-		if(istype(A, /obj/structure)) // stop climbing into railings and stuff
-			bad = TRUE
-			break
+		// if(istype(A, /obj/structure) && A.density) // stop climbing into railings and stuff
+		// 	bad = TRUE
+		// 	break
 	if(bad)
 		to_chat(user, span_warning("There's [thingelephant] in the way! You can't go there!"))
 		return

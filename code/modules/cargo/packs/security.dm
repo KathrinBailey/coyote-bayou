@@ -68,14 +68,16 @@
 
 /datum/supply_pack/security/armorplus
 	name = "Armor - Advanced"
-	desc = "Three sets of specialized armor, express requisition for those in need. Stocks tend to fluctuate."
-	cost = 3000
+	desc = "One set of advanced armor, and rarely something better."
+	cost = 5000
 	num_contained = 1
 	contains = list(/obj/effect/spawner/lootdrop/f13/uncommon_armor,
 					/obj/effect/spawner/lootdrop/f13/uncommon_armor,
 					/obj/effect/spawner/lootdrop/f13/uncommon_armor,
-					/obj/effect/spawner/lootdrop/f13/rare_armor,
-					/obj/effect/spawner/lootdrop/f13/rare_armor,
+					/obj/effect/spawner/lootdrop/f13/uncommon_armor,
+					/obj/effect/spawner/lootdrop/f13/uncommon_armor,
+					/obj/effect/spawner/lootdrop/f13/uncommon_armor,
+					/obj/effect/spawner/lootdrop/f13/uncommon_armor,
 					/obj/effect/spawner/lootdrop/f13/rare_armor)
 	crate_name = "armor crate"
 
@@ -520,11 +522,10 @@
 
 /datum/supply_pack/security/staves_basic // T1 Staves
 	name = "Magic - Basic Staves"
-	desc = "A crate containing three basic staves."
-	cost = 5000
-	num_contained = 3
+	desc = "A crate containing two basic staves."
+	cost = 3500
+	num_contained = 2
 	contains = list(
-		/obj/item/gun/magic/staff/kelpmagic/magicmissile,
 		/obj/item/gun/magic/staff/kelpmagic/acidstaff,
 		/obj/item/gun/magic/staff/kelpmagic/lightning
 		)

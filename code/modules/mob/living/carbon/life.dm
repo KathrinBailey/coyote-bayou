@@ -25,9 +25,6 @@
 	if(stat != DEAD)
 		handle_liver()
 
-	if(stat != DEAD)
-		handle_healreservoir()
-
 /mob/living/carbon/PhysicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
@@ -37,9 +34,10 @@
 
 //Procs called while dead
 /mob/living/carbon/proc/handle_death()
-	for(var/datum/reagent/R in reagents.reagent_list)
-		if(R.chemical_flags & REAGENT_DEAD_PROCESS)
-			R.on_mob_dead(src)
+	if(reagents)
+		for(var/datum/reagent/R in reagents.reagent_list)
+			if(R.chemical_flags & REAGENT_DEAD_PROCESS)
+				R.on_mob_dead(src)
 
 ///////////////
 // BREATHING //
@@ -148,7 +146,7 @@
 		adjustOxyLoss(0.5)
 
 		failed_last_breath = 1
-		throw_alert("not_enough_oxy", /obj/screen/alert/not_enough_oxy)
+		throw_alert("not_enough_oxy", /atom/movable/screen/alert/not_enough_oxy)
 		return 0
 	else
 		failed_last_breath = 0
@@ -183,13 +181,13 @@
 		if(!o2overloadtime)
 			o2overloadtime = world.time
 		else if(world.time - o2overloadtime > 120)
-			Dizzy(10)	// better than a minute of you're fucked KO, but certainly a wake up call. Honk.
+			Dizzy(10)	// better than a minute of you're fuced KO, but certainly a wake up call. Honk.
 			adjustOxyLoss(3)
 			if(world.time - o2overloadtime > 300)
 				adjustOxyLoss(8)
 		if(prob(20))
 			emote("cough")
-		throw_alert("too_much_oxy", /obj/screen/alert/too_much_oxy)
+		throw_alert("too_much_oxy", /atom/movable/screen/alert/too_much_oxy)
 		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "suffocation", /datum/mood_event/suffocation)
 
 	if(O2_partialpressure < safe_oxy_min) //Not enough oxygen
@@ -203,7 +201,7 @@
 		else
 			adjustOxyLoss(3)
 			failed_last_breath = 1
-		throw_alert("not_enough_oxy", /obj/screen/alert/not_enough_oxy)
+		throw_alert("not_enough_oxy", /atom/movable/screen/alert/not_enough_oxy)
 		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "suffocation", /datum/mood_event/suffocation)
 
 	else //Enough oxygen
@@ -232,7 +230,7 @@
 	if(Toxins_partialpressure > safe_tox_max)
 		var/ratio = (breath.get_moles(GAS_PLASMA)/safe_tox_max) * 10
 		adjustToxLoss(clamp(ratio, MIN_TOXIC_GAS_DAMAGE, MAX_TOXIC_GAS_DAMAGE))
-		throw_alert("too_much_tox", /obj/screen/alert/too_much_tox)
+		throw_alert("too_much_tox", /atom/movable/screen/alert/too_much_tox)
 	else
 		clear_alert("too_much_tox")
 
@@ -342,8 +340,9 @@
 		return
 
 	// No decay if formaldehyde/preservahyde in corpse or when the corpse is charred
-	if(reagents.has_reagent(/datum/reagent/toxin/formaldehyde, 1) || HAS_TRAIT(src, TRAIT_HUSK) || reagents.has_reagent(/datum/reagent/preservahyde, 1))
-		return
+	if(reagents	)
+		if(reagents.has_reagent(/datum/reagent/toxin/formaldehyde, 1) || HAS_TRAIT(src, TRAIT_HUSK) || reagents.has_reagent(/datum/reagent/preservahyde, 1))
+			return
 
 	// Also no decay if corpse chilled or not organic/undead
 	if((bodytemperature <= T0C-10) || !(mob_biotypes & (MOB_ORGANIC|MOB_UNDEAD)))
@@ -361,14 +360,15 @@
 
 	var/turf/open/miasma_turf = deceasedturf
 
-	var/static/datum/gas_mixture/stank
-	if(!stank) // Use a static mixture to avoid gas mixture churn.
-		stank = new
-		stank.set_moles(GAS_MIASMA,0.1)
-		stank.set_temperature(BODYTEMP_NORMAL)
+	if (miasma_turf.air)
+		var/static/datum/gas_mixture/stank
+		if(!stank) // Use a static mixture to avoid gas mixture churn.
+			stank = new
+			stank.set_moles(GAS_MIASMA,0.1)
+			stank.set_temperature(BODYTEMP_NORMAL)
 
-	miasma_turf.air.merge(stank)
-	miasma_turf.air_update_turf()
+		miasma_turf.air.merge(stank)
+		miasma_turf.air_update_turf()
 
 /mob/living/carbon/proc/handle_blood()
 	return
@@ -386,8 +386,9 @@
 			if(O)
 				O.on_life()
 	else
-		if(reagents.has_reagent(/datum/reagent/toxin/formaldehyde, 1) || reagents.has_reagent(/datum/reagent/preservahyde, 1)) // No organ decay if the body contains formaldehyde. Or preservahyde.
-			return
+		if(reagents)
+			if(reagents.has_reagent(/datum/reagent/toxin/formaldehyde, 1) || reagents.has_reagent(/datum/reagent/preservahyde, 1)) // No organ decay if the body contains formaldehyde. Or preservahyde.
+				return
 		for(var/V in internal_organs)
 			var/obj/item/organ/O = V
 			if(O)
@@ -484,8 +485,8 @@ All effects don't start immediately, but rather get worse over time; the rate is
 GLOBAL_LIST_INIT(ballmer_good_msg, list("Hey guys, what if we rolled out a bluespace wiring system so mice can't destroy the powergrid anymore?",
 										"Hear me out here. What if, and this is just a theory, we made R&D controllable from our PDAs?",
 										"I'm thinking we should roll out a git repository for our research under the AGPLv3 license so that we can share it among the other stations freely.",
-										"I dunno about you guys, but IDs and PDAs being separate is clunky as fuck. Maybe we should merge them into a chip in our arms? That way they can't be stolen easily.",
-										"Why the fuck aren't we just making every pair of shoes into galoshes? We have the technology.",
+										"I dunno about you guys, but IDs and PDAs being separate is clunky as frick. Maybe we should merge them into a chip in our arms? That way they can't be stolen easily.",
+										"Why the frick aren't we just making every pair of shoes into galoshes? We have the technology.",
 										"We can link the Ore Silo to our protolathes, so why don't we also link it to autolathes?",
 										"If we can make better bombs with heated plasma, oxygen, and tritium, then why do station nukes still use plutonium?",
 										"We should port all our NT programs to modular consoles and do away with computers. They're way more customizable, support cross-platform usage, and would allow crazy amounts of multitasking.",
@@ -742,17 +743,3 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 		return
 
 	heart.beating = !status
-
-////////////////////////////////
-//RESERVOIR FOR HEALING QUIRKS//
-////////////////////////////////
-
-/mob/living/carbon/proc/handle_healreservoir()
-	var/heal_max = 5
-	if(HAS_TRAIT(src, TRAIT_IMPROVED_HEALING))
-		heal_max = 25
-	if(heal_reservoir < heal_max)
-		if(src.reagents.has_reagent(/datum/reagent/water))
-			heal_reservoir += 0.5
-		else
-			heal_reservoir += 0.25

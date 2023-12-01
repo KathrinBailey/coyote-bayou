@@ -15,22 +15,25 @@
 	rad_insulation = RAD_HEAVY_INSULATION
 	weak_wall = FALSE
 
+/turf/closed/wall/r_wall/add_debris_element()
+	AddElement(/datum/element/debris, DEBRIS_SPARKS, -15, 8, 1)
+
 /turf/closed/wall/r_wall/deconstruction_hints(mob/user)
 	switch(d_state)
 		if(INTACT)
-			return "<span class='notice'>The outer <b>grille</b> is fully intact.</span>"
+			return span_notice("The outer <b>grille</b> is fully intact.")
 		if(SUPPORT_LINES)
-			return "<span class='notice'>The outer <i>grille</i> has been cut, and the support lines are <b>screwed</b> securely to the outer cover.</span>"
+			return span_notice("The outer <i>grille</i> has been cut, and the support lines are <b>screwed</b> securely to the outer cover.")
 		if(COVER)
-			return "<span class='notice'>The support lines have been <i>unscrewed</i>, and the metal cover is <b>welded</b> firmly in place.</span>"
+			return span_notice("The support lines have been <i>unscrewed</i>, and the metal cover is <b>welded</b> firmly in place.")
 		if(CUT_COVER)
-			return "<span class='notice'>The metal cover has been <i>sliced through</i>, and is <b>connected loosely</b> to the girder.</span>"
+			return span_notice("The metal cover has been <i>sliced through</i>, and is <b>connected loosely</b> to the girder.")
 		if(ANCHOR_BOLTS)
-			return "<span class='notice'>The outer cover has been <i>pried away</i>, and the bolts anchoring the support rods are <b>wrenched</b> in place.</span>"
+			return span_notice("The outer cover has been <i>pried away</i>, and the bolts anchoring the support rods are <b>wrenched</b> in place.")
 		if(SUPPORT_RODS)
-			return "<span class='notice'>The bolts anchoring the support rods have been <i>loosened</i>, but are still <b>welded</b> firmly to the girder.</span>"
+			return span_notice("The bolts anchoring the support rods have been <i>loosened</i>, but are still <b>welded</b> firmly to the girder.")
 		if(SHEATH)
-			return "<span class='notice'>The support rods have been <i>sliced through</i>, and the outer sheath is <b>connected loosely</b> to the girder.</span>"
+			return span_notice("The support rods have been <i>sliced through</i>, and the outer sheath is <b>connected loosely</b> to the girder.")
 
 /turf/closed/wall/r_wall/devastate_wall()
 	new sheet_type(src, sheet_amount)
@@ -267,7 +270,7 @@
 
 /turf/closed/wall/r_wall/syndicate/overspace
 	icon_state = "map-overspace"
-	fixed_underlay = list("space"=1)
+	// fixed_underlay = list("space"=1)
 
 /////////////////////Pirate Ship walls/////////////////////
 
@@ -286,4 +289,4 @@
 
 /turf/closed/wall/r_wall/syndicate/pirate/overspace
 	icon_state = "map-overspace"
-	fixed_underlay = list("space"=1)
+	// fixed_underlay = list("space"=1)

@@ -19,7 +19,7 @@ Slimecrossing Armor
 
 /obj/item/clothing/mask/nobreath/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
-	if(slot == SLOT_WEAR_MASK)
+	if(slot == SLOT_MASK)
 		ADD_TRAIT(user, TRAIT_NOBREATH, "breathmask_[REF(src)]")
 		user.failed_last_breath = FALSE
 		user.clear_alert("not_enough_oxy")
@@ -124,7 +124,7 @@ Slimecrossing Armor
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		if(src == C.head)
-			to_chat(user, "<span class='warning'>You feel at peace. <b style='color:pink'>Why would you want anything else?</b></span>")
+			to_chat(user, span_warning("You feel at peace. <b style='color:pink'>Why would you want anything else?</b>"))
 			return
 	return ..()
 

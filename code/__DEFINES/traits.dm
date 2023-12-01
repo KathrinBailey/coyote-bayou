@@ -101,6 +101,7 @@
 #define TRAIT_DUMB				"dumb"
 #define TRAIT_MONKEYLIKE		"monkeylike" //sets IsAdvancedToolUser to FALSE
 #define TRAIT_PACIFISM			"pacifism"
+#define TRAIT_PACIFISM_LESSER	"lesserpacifism"
 #define TRAIT_IGNORESLOWDOWN	"ignoreslow"
 #define TRAIT_IGNOREDAMAGESLOWDOWN "ignoredamageslowdown"
 #define TRAIT_DEATHCOMA			"deathcoma" //Causes death-like unconsciousness
@@ -131,6 +132,7 @@
 #define TRAIT_NODISMEMBER		"dismember_immunity"
 #define TRAIT_NOFIRE			"nonflammable"
 #define TRAIT_NOGUNS			"no_guns"
+#define TRAIT_MARTIAL_A			"no_guns"
 #define TRAIT_NOHUNGER			"no_hunger"
 #define TRAIT_EASYDISMEMBER		"easy_dismember"
 #define TRAIT_LIMBATTACHMENT 	"limb_attach"
@@ -265,7 +267,7 @@
 #define TRAIT_FREERUNNING		"freerunning"
 #define TRAIT_SKITTISH			"skittish"
 #define TRAIT_POOR_AIM			"poor_aim"
-#define TRAIT_INSANE_AIM		"insane_aim" //they don't miss. they never miss. it was all part of their immaculate plan.
+#define TRAIT_CRIT_SHOT		"crit_shot" //Crits are cool, but have you ever critted 3 times in a row?
 #define SPREAD_CONTROL		"spread_control"
 #define TRAIT_PROSOPAGNOSIA		"prosopagnosia"
 #define TRAIT_DRUNK_HEALING		"drunk_healing"
@@ -288,6 +290,9 @@
 #define TRAIT_FEV				"FEV_MUT" //OH BOY
 #define TRAIT_GHOULMELEE		"ghoulmelee"
 #define TRAIT_TRAPPER			"trapper"
+#define TRAIT_SHOCKINGGRASP		"shocking_grasp"
+//#define //TRAIT_BOOMING			//"booming_blade"
+#define TRAIT_TELEPATHY			"telepathy"
 #define TRAIT_IRONFIST			"iron_fist"
 #define TRAIT_STEELFIST			"steel_fist"
 #define TRAIT_NOODLEFIST			"noodle_fist"
@@ -320,6 +325,8 @@
 #define TRAIT_ILLITERATE "illiterate"
 #define TRAIT_PAPER_SKIN "paper_skin"
 #define TRAIT_GLASS_BONES "glass_bones"
+/// Coyote Boyou trait that replaces paper skin and glass bones!
+#define TRAIT_EASILY_WOUNDED "easily_wounded"
 #define TRAIT_STEEL_ASS "steel_ass"
 #define TRAIT_JIGGLY_ASS "jiggly_ass"
 #define TRAIT_DISTANT "distant"
@@ -337,7 +344,9 @@
 #define TRAIT_WHITE_WOMAN "peanutbutter-difficulties"
 #define TRAIT_AUTOBREW "autobrewery-syndrome"
 #define TRAIT_ZOOMIES "zoomies"
+#define ZOOMIES_STAM_MULT 0.75
 #define TRAIT_SUPER_ZOOMIES "super zoomies"
+#define SUPER_ZOOMIES_STAM_MULT 0.5
 #define TRAIT_ENDLESS_RUNNER "endless_runner"
 #define TRAIT_PANICKED_ATTACKER "panicked_attacker"
 #define TRAIT_NOHIDEFACE "no hide face"
@@ -493,6 +502,7 @@
 #define CURSED_MASK_TRAIT "cursed-mask"
 #define HIS_GRACE_TRAIT "his-grace"
 #define HAND_REPLACEMENT_TRAIT "magic-hand"
+#define FEET_REPLACEMENT_TRAIT "feet-replacer"
 #define HOT_POTATO_TRAIT "hot-potato"
 #define ABDUCTOR_VEST_TRAIT "abductor-vest"
 #define CAPTURE_THE_FLAG_TRAIT "capture-the-flag"
@@ -544,6 +554,7 @@
 #define QUIRK_MECHANICS "Qmechanics"
 #define QUIRK_CONFLICTS "Qconflicts"
 #define QUIRK_CATEGORY "Qcategory"
+#define QUIRK_HUMANONLY "Qhumanonly"
 
 #define QUIRK_CAT_DEFAULT "Misc"
 

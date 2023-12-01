@@ -501,6 +501,8 @@ Turf and target are separate in case you want to teleport some distance from a t
 	var/steps = 1
 	if(current != target_turf)
 		current = get_step_towards(current, target_turf)
+		if (!current)
+			return 0 // How did you get from somewhere to nowhere????
 		while(current != target_turf)
 			if(steps > length)
 				return 0
@@ -1632,13 +1634,15 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 /// REcursively searches through the atom's loc, looking for a type path, aborting if it hits a turf
 /proc/recursive_loc_path_search(atom/haystack, pathtype, max_depth = 5)
+	if(!haystack)
+		return // There is no haystack, or needle for that matter
 	if(max_depth <= 0)
 		return // we've gone too deep
 	if(istype(haystack, pathtype))
 		return haystack
 	if(isturf(haystack))
 		return
-	if(haystack.loc)
+	if(haystack && haystack.loc)
 		return recursive_loc_path_search(haystack.loc, pathtype, max_depth - 1)
 
 /// Recursively searches through everything in a turf for atoms. Will recursively search through all those atoms for atoms, and so on.
@@ -1726,12 +1730,13 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		return mobby.client.prefs
 	if(istext(something))
 		if(!(something in GLOB.directory))
-			CRASH("extract_prefs() was given a ckey that wasn't in the directory. This is a bug, please report it.")
+			return
+			// CRASH("extract_prefs() was given a ckey that wasn't in the directory. This is a bug, please report it.")
 		var/client/clont = LAZYACCESS(GLOB.directory, something)
 		if(!clont)
 			return // probably... disconnected? v0v
 		return clont.prefs
-	CRASH("extract_prefs() was given something that wasn't a client, mob, or ckey. I mean seriously this is about as forgiving as it gets!")
+	// CRASH("extract_prefs() was given something that wasn't a client, mob, or ckey. I mean seriously this is about as forgiving as it gets!")
 
 /// Takes in a mob, client, or even prefs, and returns their ckey
 /proc/extract_ckey(something) // one way or another, im getting your ckey (to break)
@@ -1746,7 +1751,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	if(ismob(something))
 		var/mob/mobby = something
 		return mobby.ckey
-	CRASH("extract_prefs() was given something that wasn't a client, mob, or ckey. I mean seriously this is about as forgiving as it gets!")
+	// CRASH("extract_prefs() was given something that wasn't a client, mob, or ckey. I mean seriously this is about as forgiving as it gets!")
 
 /// Makes a gaussian distribution, returning a positive integer
 /proc/GaussianReacharound(mean, stddev, min, max)

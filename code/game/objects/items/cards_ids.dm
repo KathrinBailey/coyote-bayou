@@ -133,10 +133,10 @@
 
 /obj/item/card/emag/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>It has <b>[uses ? uses : "no"]</b> charges left.</span>"
+	. += span_notice("It has <b>[uses ? uses : "no"]</b> charges left.")
 
 /obj/item/card/id/examine_more(mob/user)
-	var/list/msg = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>")
+	var/list/msg = list(span_notice("<i>You examine [src] closer, and note the following...</i>"))
 
 	if(mining_points)
 		msg += "There's [mining_points] mining equipment redemption point\s loaded onto this card."
@@ -241,6 +241,7 @@
 	if(my_store)
 		my_store.my_card = null
 		my_store = null
+	SEND_SIGNAL(src, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_GOD)
 	return ..()
 
 /obj/item/card/id/vv_edit_var(var_name, var_value)
@@ -670,7 +671,7 @@
 /obj/item/card/id/prisoner/examine(mob/user)
 	. = ..()
 	if(sentence && world.time < sentence)
-		. += "<span class='notice'>You're currently serving a sentence for [crime]. <b>[DisplayTimeText(sentence - world.time)]</b> left.</span>"
+		. += span_notice("You're currently serving a sentence for [crime]. <b>[DisplayTimeText(sentence - world.time)]</b> left.")
 	else if(goal)
 		. += span_notice("You have accumulated [points] out of the [goal] points you need for freedom.")
 	else if(!sentence)
@@ -1275,16 +1276,12 @@
 /obj/item/card/id/tribetattoo
 	name = "Tattoo of the machine spirits"
 	desc = "A tattoo depicting the five machine spirits in harmony."
-	icon_state = "talisman"
-	item_state = "talisman"
+	icon_state = "tribalID"
+	item_state = "tribalID"
 	assignment = "tribe tattoo"
 	uses_overlays = FALSE
 
 	access = list(ACCESS_TRIBE)
-
-/obj/item/card/id/tribetattoo/Initialize()
-	. = ..()
-	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
 
 /obj/item/card/id/silver/mayor
 	name = "Mayor's mayoral permit"

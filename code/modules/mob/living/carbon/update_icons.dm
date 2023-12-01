@@ -41,12 +41,12 @@
 						if(!observers.len)
 							observers = null
 							break
+		if(!IsFeral())
+			var/icon_file = I.lefthand_file
+			if(get_held_index_of_item(I) % 2 == 0)
+				icon_file = I.righthand_file
 
-		var/icon_file = I.lefthand_file
-		if(get_held_index_of_item(I) % 2 == 0)
-			icon_file = I.righthand_file
-
-		hands += I.build_worn_icon(default_layer = HANDS_LAYER, default_icon_file = icon_file, isinhands = TRUE)
+			hands += I.build_worn_icon(default_layer = HANDS_LAYER, default_icon_file = icon_file, isinhands = TRUE)
 
 	overlays_standing[HANDS_LAYER] = hands
 	apply_overlay(HANDS_LAYER)
@@ -91,7 +91,7 @@
 		return
 
 	if(client && hud_used)
-		var/obj/screen/inventory/inv = hud_used.inv_slots[SLOT_WEAR_MASK]
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_MASK]
 		inv?.update_icon()
 
 	if(wear_mask)
@@ -105,11 +105,11 @@
 	remove_overlay(NECK_LAYER)
 
 	if(client && hud_used && hud_used.inv_slots[SLOT_NECK])
-		var/obj/screen/inventory/inv = hud_used.inv_slots[SLOT_NECK]
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_NECK]
 		inv.update_icon()
 
 	if(wear_neck)
-		if(!(head && (head.flags_inv & HIDENECK)))
+		if(!(head && (head.flags_inv & HIDENECK)) && !IsFeral())
 			overlays_standing[NECK_LAYER] = wear_neck.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = 'icons/mob/clothing/neck.dmi', override_state = wear_neck.icon_state)
 		update_hud_neck(wear_neck)
 
@@ -119,11 +119,12 @@
 	remove_overlay(BACK_LAYER)
 
 	if(client && hud_used)
-		var/obj/screen/inventory/inv = hud_used.inv_slots[SLOT_BACK]
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_BACK]
 		inv?.update_icon()
 
 	if(back)
-		overlays_standing[BACK_LAYER] = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = 'icons/mob/clothing/back.dmi', override_state = back.icon_state)
+		if(!IsFeral())
+			overlays_standing[BACK_LAYER] = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = 'icons/mob/clothing/back.dmi', override_state = back.icon_state)
 		update_hud_back(back)
 
 	apply_overlay(BACK_LAYER)
@@ -135,7 +136,7 @@
 		return
 
 	if(client && hud_used)
-		var/obj/screen/inventory/inv = hud_used.inv_slots[SLOT_HEAD]
+		var/atom/movable/screen/inventory/inv = hud_used.inv_slots[SLOT_HEAD]
 		inv?.update_icon()
 
 	if(head)
@@ -163,7 +164,7 @@
 
 		overlays_standing[LEGCUFF_LAYER] = legcuffs
 		apply_overlay(LEGCUFF_LAYER)
-		throw_alert("legcuffed", /obj/screen/alert/restrained/legcuffed, new_master = legcuffed)
+		throw_alert("legcuffed", /atom/movable/screen/alert/restrained/legcuffed, new_master = legcuffed)
 
 //mob HUD updates for items in our inventory
 
@@ -171,7 +172,7 @@
 /mob/living/carbon/proc/update_hud_handcuffed()
 	if(hud_used)
 		for(var/hand in hud_used.hand_slots)
-			var/obj/screen/inventory/hand/H = hud_used.hand_slots[hand]
+			var/atom/movable/screen/inventory/hand/H = hud_used.hand_slots[hand]
 			if(H)
 				H.update_icon()
 
@@ -214,27 +215,28 @@
 		var/obj/item/bodypart/BP = X
 		BP.update_limb()
 
-	//LOAD ICONS
-	if(limb_icon_cache[icon_render_key])
-		load_limb_from_cache()
-		return
+	if(!IsFeral())
+		//LOAD ICONS
+		if(limb_icon_cache[icon_render_key])
+			load_limb_from_cache()
+			return
 
-	//GENERATE NEW LIMBS
-	var/static/list/leg_day = typecacheof(list(/obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg))
-	var/list/new_limbs = list()
-	var/list/new_arms = list()
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/BP = X
-		if(is_taur && leg_day[BP.type])
-			continue
-		if(BP.onmob_layer == ARMS_PART_LAYER)
-			new_arms += BP.get_limb_icon()
-		else
-			new_limbs += BP.get_limb_icon()
-	if(new_limbs.len)
-		overlays_standing[BODYPARTS_LAYER] = new_limbs
-		overlays_standing[ARMS_PART_LAYER] = new_arms
-		limb_icon_cache[icon_render_key] = new_limbs + new_arms
+		//GENERATE NEW LIMBS
+		var/static/list/leg_day = typecacheof(list(/obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg))
+		var/list/new_limbs = list()
+		var/list/new_arms = list()
+		for(var/X in bodyparts)
+			var/obj/item/bodypart/BP = X
+			if(is_taur && leg_day[BP.type])
+				continue
+			if(BP.onmob_layer == ARMS_PART_LAYER)
+				new_arms += BP.get_limb_icon()
+			else
+				new_limbs += BP.get_limb_icon()
+		if(new_limbs.len)
+			overlays_standing[BODYPARTS_LAYER] = new_limbs
+			overlays_standing[ARMS_PART_LAYER] = new_arms
+			limb_icon_cache[icon_render_key] = new_limbs + new_arms
 
 	apply_overlay(ARMS_PART_LAYER)
 	apply_overlay(BODYPARTS_LAYER)

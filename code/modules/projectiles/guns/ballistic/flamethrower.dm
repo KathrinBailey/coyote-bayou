@@ -27,7 +27,7 @@
 /obj/item/m2flamethrowertank/process()
 	overheat = max(0, overheat - heat_diffusion)
 
-/obj/item/m2flamethrowertank/on_attack_hand(mob/living/carbon/user)
+/obj/item/m2flamethrowertank/on_attack_hand(mob/living/user)
 	if(src.loc == user)
 		if(!armed)
 			if(user.get_item_by_slot(SLOT_BACK) == src)
@@ -37,7 +37,10 @@
 					to_chat(user, span_warning("You need a free hand to hold the gun!"))
 					return
 				update_icon()
-				user.update_inv_back()
+				if(iscarbon(user))
+					user.update_inv_back()
+			else
+				..()
 		else
 			to_chat(user, span_warning("You are already holding the gun!"))
 	else
@@ -58,16 +61,16 @@
 	. = ..()
 	if(armed)
 		return
-	if(iscarbon(usr))
-		var/mob/M = usr
+	if(isliving(usr))
+		var/mob/living/M = usr
 
 		if(!over_object)
 			return
 
 		if(!M.incapacitated())
 
-			if(istype(over_object, /obj/screen/inventory/hand))
-				var/obj/screen/inventory/hand/H = over_object
+			if(istype(over_object, /atom/movable/screen/inventory/hand))
+				var/atom/movable/screen/inventory/hand/H = over_object
 				M.putItemFromInventoryInHandIfPossible(src, H.held_index)
 
 

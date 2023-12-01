@@ -56,6 +56,9 @@
 #define INITIALIZE_HINT_LATELOAD 1  //Call LateInitialize
 #define INITIALIZE_HINT_QDEL 2  //Call qdel on the atom
 
+///Call qdel with a force of TRUE after initialization
+#define INITIALIZE_HINT_QDEL_FORCE 3
+
 //type and all subtypes should always call Initialize in New()
 #define INITIALIZE_IMMEDIATE(X) ##X/New(loc, ...){\
 	..();\
@@ -121,7 +124,7 @@
 #define INIT_ORDER_LATELOAD			-97
 #define INIT_ORDER_DEMO				-99  // o avoid a bunch of changes related to initialization being written, do this last
 #define INIT_ORDER_CHAT				-100 //Should be last to ensure chat remains smooth during init.
-
+#define INIT_ORDER_INTERACTIONS		-150
 
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)
@@ -159,6 +162,7 @@
 #define FIRE_PRIORITY_ATMOS_ADJACENCY	300
 #define FIRE_PRIORITY_STATPANEL		390
 #define FIRE_PRIORITY_CHAT			400
+#define FIRE_PRIORITY_MOUSE_ENTERED	450
 #define FIRE_PRIORITY_OVERLAYS		500
 #define FIRE_PRIORITY_CALLBACKS		600
 #define FIRE_PRIORITY_TIMER			700

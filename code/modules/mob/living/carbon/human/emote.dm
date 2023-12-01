@@ -112,6 +112,8 @@
 	if(!..())
 		return FALSE
 	var/mob/living/carbon/human/H = user
+	if(!istype(H))
+		return FALSE
 	return H.dna && H.dna.species && H.dna.species.can_wag_tail(user)
 
 /datum/emote/living/carbon/human/wag/select_message_type(mob/user)
@@ -121,6 +123,11 @@
 		return
 	if(H.dna.species.is_wagging_tail())
 		. = null
+
+/datum/emote/living/carbon/human/wag/lash
+	key = "lashtail"
+	key_third_person = "lashes"
+	message = "lashes their tail."
 
 /datum/emote/living/carbon/human/wing
 	key = "wing"
@@ -148,6 +155,8 @@
 	if(!..())
 		return FALSE
 	var/mob/living/carbon/human/H = user
+	if(!istype(H))
+		return FALSE
 	if(H.dna && H.dna.species && (H.dna.features["wings"] != "None"))
 		return TRUE
 

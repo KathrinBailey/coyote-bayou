@@ -25,6 +25,13 @@
 	desc = "For one reason or another your feet are too tough to need shoes. Or maybe you're just very agile. Who knows."
 	icon_state = "pawb" //uwu//
 	item_state = "pawb"
+	resistance_flags = FIRE_PROOF | ACID_PROOF
+	can_be_tied	= FALSE
+	rad_flags = RAD_NO_CONTAMINATE
+
+/obj/item/clothing/shoes/f13/rag/pawb/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, FEET_REPLACEMENT_TRAIT)
 
 /obj/item/clothing/shoes/f13/tan
 	name = "tan shoes"
@@ -32,6 +39,12 @@
 	icon_state = "tan"
 	item_state = "tan"
 	mutantrace_variation = STYLE_DIGITIGRADE
+
+/obj/item/clothing/shoes/f13/ninja
+	name = "ninja shoes"
+	desc = "A pair of running shoes. Excellent for running and even better for smashing skulls."
+	icon_state = "s-ninja"
+	icon_state = "s-ninja"
 
 /obj/item/clothing/shoes/f13/brownie //Make a craft recipe, and delete this comment.
 	name = "brown shoes"

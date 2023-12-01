@@ -73,6 +73,7 @@ proc/get_top_level_mob(mob/S)
 	else
 		message = span_subtle("<b>[user]</b> " + "<i>[user.say_emphasis(message)]</i>")
 
+
 	var/list/non_admin_ghosts = list()
 	// Exclude ghosts from the initial message if its a subtler, lets be *discrete*
 	if(subtler)
@@ -120,7 +121,7 @@ proc/get_top_level_mob(mob/S)
 
 
 /mob/proc/print_special()
-	var/msg = "S:[special_s],P:[special_p],E:[special_e],C:[special_c],I:[special_i],A:[special_a],L:[special_l]<br>"
+	var/msg = "S:[special_s],P:[special_p],E:[special_e],C:[special_c],I:[special_i],A:[special_a],L:[special_l]\n"
 
 	if (special_s<3)
 		msg += "<br>This person looks puny, like a total noodle."
@@ -151,7 +152,6 @@ proc/get_top_level_mob(mob/S)
 		msg += "<br>Moving like a panther, it is a wonder you have even noticed that they are here."
 	if (special_l>7)
 		msg += "<br>Somehow you just know that they are as lucky as it gets."
-	msg += "<br> *---------**---------*"
 	return msg
 
 ///////////////// SUBTLE 2: NO GHOST BOOGALOO

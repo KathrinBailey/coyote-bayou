@@ -83,6 +83,19 @@
 	flags_cover = HEADCOVERSEYES
 	salvage_loot = list(/obj/item/stack/crafting/armor_plate = 5)
 
+/obj/item/clothing/head/helmet/f13/combat/mk2/custom
+	name = "weathered deathclaw power armor helmet"
+	desc = "An Enclave 'Equalizer' Advanced power armor helmet-- though this one appears to be more like a mask, to accommodate a deathclaw's uniquely shaped skull. The polarized yellow lenses have long since stopped functioning, and one of the lenses is badly cracked. It's pretty hard to see out of, but it's something, at least."
+	icon_state = "arroyohelm"
+	item_state = "arroyohelm"
+	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_UP_MELEE_T2)
+	resistance_flags = LAVA_PROOF | FIRE_PROOF
+	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
+	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
+	icon = 'icons/fallout/clothing/helmets.dmi'
+	flags_inv = HIDESNOUT
+	var/requires_training = TRUE
+
 /obj/item/clothing/head/helmet/f13/combat/mk2/dark
 	name = "reinforced combat helmet"
 	color = "#302E2E" // Dark Grey
@@ -366,11 +379,11 @@
 /obj/item/clothing/head/helmet/f13/power_armor/proc/salvage_hint()
 	switch(salvage_step)
 		if(0)
-			return "<span class='notice'>The metal cover can be <i>screwed</i> open.</span>"
+			return span_notice("The metal cover can be <i>screwed</i> open.")
 		if(1)
-			return "<span class='notice'>The cover is <i>screwed</i> open with connection ports <i>bolted down</i>.</span>"
+			return span_notice("The cover is <i>screwed</i> open with connection ports <i>bolted down</i>.")
 		if(2)
-			return "<span class='warning'>The connections ports have been <i>unanchored</i> and only <i>wires</i> remain.</span>"
+			return span_warning("The connections ports have been <i>unanchored</i> and only <i>wires</i> remain.")
 
 /obj/item/clothing/head/helmet/f13/power_armor/t45b
 	name = "Refurbished T-45b helmet"
@@ -922,6 +935,15 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEHAIR|HIDEFACIALHAIR|HIDEFACE
 	armor = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_DOWN_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T2, ARMOR_MODIFIER_UP_DT_T1)
+
+/obj/item/clothing/head/helmet/f13/ninja
+	name = "ninja hood"
+	desc = "What may appear to be a simple black garment is in fact a lightly padded helmet. Standard issue ninja gear."
+	icon = 'icons/obj/clothing/hats.dmi'
+	icon_state = "s-ninja"
+	item_state = "s-ninja_mask"
+	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR
+	armor = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/head/hat/polis
 	name = "police officer's hat"

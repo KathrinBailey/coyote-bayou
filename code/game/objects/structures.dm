@@ -18,8 +18,6 @@
 	//ricochet_chance_mod = 0.5
 
 /obj/structure/Initialize()
-	if (!armor)
-		armor = ARMOR_VALUE_LIGHT
 	. = ..()
 	if(smooth)
 		queue_smooth(src)
@@ -66,7 +64,7 @@
 /obj/structure/proc/do_climb(atom/movable/A)
 	if(climbable)
 		density = FALSE
-		. = step(A,get_dir(A,src.loc))
+		. = step(A, (A.loc == loc ? dir : get_dir(A,src.loc)))
 		density = TRUE
 
 /obj/structure/proc/climb_structure(mob/living/user)

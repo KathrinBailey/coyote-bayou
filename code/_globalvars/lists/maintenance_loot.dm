@@ -107,7 +107,7 @@ GLOBAL_LIST_INIT(maintenance_loot, list(
 	/obj/item/toy/eightball = 1,
 	/obj/item/reagent_containers/pill/floorpill = 1,
 	/obj/item/reagent_containers/food/snacks/cannedpeaches/maint = 2,
-	/obj/item/clothing/shoes/wheelys = 1,
+//	/obj/item/clothing/shoes/wheelys = 1,
 	/obj/item/clothing/shoes/kindleKicks = 1,
 	/obj/item/storage/box/marshmallow = 2,
 	/obj/item/clothing/gloves/tackler/offbrand = 1,
@@ -333,6 +333,17 @@ GLOBAL_LIST_INIT(trash_attachment, list(
 	/obj/item/tool_upgrade/productivity/booster = 1,
 //	/obj/item/tool_upgrade/productivity/red_paint = 2
 ))
+
+GLOBAL_LIST_INIT(trash_mob_loot, GLOB.trash_ammo +\
+	GLOB.trash_chem +\
+	GLOB.trash_clothing +\
+	GLOB.trash_craft +\
+	GLOB.trash_gun +\
+	GLOB.trash_misc +\
+	GLOB.trash_mob +\
+	GLOB.trash_part +\
+	GLOB.trash_tool +\
+	GLOB.trash_attachment)
 
 GLOBAL_LIST_INIT(loot_prewar_clothing, list(
 	/obj/item/clothing/under/overalls,
@@ -644,7 +655,7 @@ GLOBAL_LIST_INIT(loot_t4_range, list(
 	/obj/item/gun/ballistic/rifle/repeater/brush,
 	/obj/item/ammo_box/tube/c4570,
 	/obj/item/ammo_box/tube/c4570,
-	/obj/item/gun/ballistic/rifle/mag/antimateriel,
+	/obj/item/gun/ballistic/rifle/mag/antimaterial,
 	/obj/item/ammo_box/magazine/amr,
 	/obj/item/gun/ballistic/revolver/m2405,
 	/obj/item/ammo_box/rev308,

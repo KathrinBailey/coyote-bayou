@@ -87,6 +87,7 @@
 
 	var/message_flags = (only_overhead ? (EMOTE_MESSAGE | ONLY_OVERHEAD) : (EMOTE_MESSAGE))
 
+
 	msg = "<span class='emote'>[msg]</span>"
 	if(!omit_left_name)
 		ENABLE_BITFIELD(message_flags, PUT_NAME_IN)
@@ -106,7 +107,7 @@
 			continue
 		if(!(ghost.client.prefs.chat_toggles & CHAT_GHOSTSIGHT))
 			continue
-		if(client.ckey in ghost.client.prefs.aghost_squelches)
+		if(client && client.ckey && (client.ckey in ghost.client.prefs.aghost_squelches)) // We cannot assume they have a client.
 			continue
 		if(admin_only && !check_rights_for(ghost.client, R_ADMIN))
 			continue

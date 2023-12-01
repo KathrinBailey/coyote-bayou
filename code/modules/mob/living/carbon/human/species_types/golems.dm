@@ -12,7 +12,7 @@
 	punchdamagelow = 5
 	punchdamagehigh = 14
 	punchstunthreshold = 10
-	no_equip = list(SLOT_WEAR_MASK, SLOT_WEAR_SUIT, SLOT_GLOVES, SLOT_SHOES, SLOT_W_UNIFORM, SLOT_S_STORE)
+	no_equip = list(SLOT_MASK, SLOT_WEAR_SUIT, SLOT_GLOVES, SLOT_SHOES, SLOT_W_UNIFORM, SLOT_S_STORE)
 	nojumpsuit = 1
 	sexes = 1
 	damage_overlay_type = ""
@@ -908,7 +908,7 @@
 
 /datum/action/innate/bonechill/Activate()
 	if(world.time < last_use + cooldown)
-		to_chat(owner, "<span class='notice'>You aren't ready yet to rattle your bones again</span>")
+		to_chat(owner, span_notice("You aren't ready yet to rattle your bones again"))
 		return
 	owner.visible_message(span_warning("[owner] rattles [owner.p_their()] bones harrowingly."), span_notice("You rattle your bones"))
 	last_use = world.time
